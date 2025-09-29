@@ -1,6 +1,6 @@
 package enums;
 
-public enum TipoBiglietto {
+public enum TipoTitoloViaggio {
     ABBONAMENTO,
     BIGLIETTO
 }
