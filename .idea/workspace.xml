@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43fd977c-6d32-445d-abfe-441a28920b60" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Abbonamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Abbonamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Biglietto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Biglietto.java" afterDir="false" />
-    </list>
+    <list default="true" id="43fd977c-6d32-445d-abfe-441a28920b60" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,7 +48,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "AminNuova1",
+    "git-widget-placeholder": "Davide__Branch__2",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "rearrange.code.on.save": "true",
