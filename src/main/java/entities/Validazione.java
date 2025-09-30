@@ -23,6 +23,9 @@ public class Validazione {
 
     // Costruttore
 
+    public Validazione() {
+    }
+
     public Validazione(long idValidazione, long idMezzo, long idBiglietto, long idTessera, LocalDate dataOraValidazione) {
         this.idValidazione = idValidazione;
         this.idMezzo = idMezzo;
