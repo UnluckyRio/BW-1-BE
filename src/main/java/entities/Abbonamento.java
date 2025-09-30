@@ -30,7 +30,7 @@ public class Abbonamento {
     @Column(name = "id_distributore", nullable = false)
     protected DistributoreAutomatico iddistributore;
 
-
+    @Enumerated(EnumType.STRING)
     @Column(name = "Tipo abbonamento", nullable = false)
     private TipoAbbonamento tipoAbbonamento;
 
@@ -40,22 +40,18 @@ public class Abbonamento {
     @Column(name = "Data scadenza iscrizione", nullable = false)
     private LocalDate datafinevalidita;
 
-    @OneToOne
-    @JoinColumn(name = "id_validazione")
-    private Validazione validazione;
-
 
     public Abbonamento() {
 
     }
 
-    public Abbonamento(LocalDate dataEmissione, double prezzo, TipoAbbonamento tipoAbbonamento, LocalDate datainiziovalidita, LocalDate datafinevalidita, Validazione validazione) {
+    public Abbonamento(LocalDate dataEmissione, double prezzo, TipoAbbonamento tipoAbbonamento, LocalDate datainiziovalidita, LocalDate datafinevalidita) {
 
         this.id = id;
         this.tipoAbbonamento = tipoAbbonamento;
         this.datainiziovalidita = datainiziovalidita;
         this.datafinevalidita = datafinevalidita;
-        this.validazione = validazione;
+
     }
 
     public long getId() {
@@ -106,11 +102,18 @@ public class Abbonamento {
         this.datafinevalidita = datafinevalidita;
     }
 
-    public Validazione getValidazione() {
-        return validazione;
-    }
 
-    public void setValidazione(Validazione validazione) {
-        this.validazione = validazione;
+    @Override
+    public String toString() {
+        return "Abbonamento{" +
+                "id=" + id +
+                ", dataEmissione=" + dataEmissione +
+                ", prezzo=" + prezzo +
+                ", idrivenditore=" + idrivenditore +
+                ", iddistributore=" + iddistributore +
+                ", tipoAbbonamento=" + tipoAbbonamento +
+                ", datainiziovalidita=" + datainiziovalidita +
+                ", datafinevalidita=" + datafinevalidita +
+                '}';
     }
 }

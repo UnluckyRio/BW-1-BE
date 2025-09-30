@@ -24,13 +24,8 @@ public class Biglietto {
     private long id;
     @Column(name = "Timbrato", nullable = false)
     private boolean timbrato;
-
     @Column(name = "durata validazione", nullable = false)
     private int durataValidazione;
-
-    @OneToOne
-    @JoinColumn(name = "id_validazione")
-    private Validazione validazione;
 
 
     public Biglietto() {
@@ -38,12 +33,11 @@ public class Biglietto {
     }
 
 
-    public Biglietto(LocalDate dataEmissione, double prezzo, boolean timbrato, int durataValidazione, Validazione validazione) {
+    public Biglietto(LocalDate dataEmissione, double prezzo, boolean timbrato, int durataValidazione) {
 
         this.id = id;
         this.timbrato = timbrato;
         this.durataValidazione = durataValidazione;
-        this.validazione = validazione;
     }
 
     public LocalDate getDataEmissione() {
@@ -102,12 +96,18 @@ public class Biglietto {
         this.durataValidazione = durataValidazione;
     }
 
-    public Validazione getValidazione() {
-        return validazione;
-    }
 
-    public void setValidazione(Validazione validazione) {
-        this.validazione = validazione;
+    @Override
+    public String toString() {
+        return "Biglietto{" +
+                "dataEmissione=" + dataEmissione +
+                ", prezzo=" + prezzo +
+                ", idrivenditore=" + idrivenditore +
+                ", iddistributore=" + iddistributore +
+                ", id=" + id +
+                ", timbrato=" + timbrato +
+                ", durataValidazione=" + durataValidazione +
+                '}';
     }
 
 }

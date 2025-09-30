@@ -59,4 +59,14 @@ public class DistributoreAutomatico {
     public void setId_abbonamento(long id_abbonamento) {
         this.id_abbonamento = id_abbonamento;
     }
+
+    @Override
+    public String toString() {
+        return "DistributoreAutomatico{" +
+                "id_distributoreAutomatico=" + id_distributoreAutomatico +
+                ", statoDistributore=" + statoDistributore +
+                ", id_biglietto=" + id_biglietto +
+                ", id_abbonamento=" + id_abbonamento +
+                '}';
+    }
 }

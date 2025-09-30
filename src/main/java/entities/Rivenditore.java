@@ -1,5 +1,6 @@
 package entities;
 
+import enums.StatoRivenditore;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +13,8 @@ public class Rivenditore {
     @Column(name = "nomeRivenditore", nullable = false, length = 30)
     private String nomeRivenditore;
     @Enumerated(EnumType.STRING)
+    @Column(name = "Stato apertura", nullable = false)
+    private StatoRivenditore statoRivenditore;
     @Column(name = "nomeRivenditore")
     private Rivenditore rivenditore;
     @Column(name = "id_biglietto")
@@ -22,9 +25,10 @@ public class Rivenditore {
     public Rivenditore() {
     }
 
-    public Rivenditore(long id_rivenditore, String nomeRivenditore, Rivenditore rivenditore, long id_biglietto, long getId_biglietto) {
+    public Rivenditore(long id_rivenditore, String nomeRivenditore, StatoRivenditore statoRivenditore, Rivenditore rivenditore, long id_biglietto, long getId_biglietto) {
         this.id_rivenditore = id_rivenditore;
         this.nomeRivenditore = nomeRivenditore;
+        this.statoRivenditore = statoRivenditore;
         this.rivenditore = rivenditore;
         this.id_biglietto = id_biglietto;
         this.getId_biglietto = getId_biglietto;
@@ -44,6 +48,14 @@ public class Rivenditore {
 
     public void setNomeRivenditore(String nomeRivenditore) {
         this.nomeRivenditore = nomeRivenditore;
+    }
+
+    public StatoRivenditore getStatoRivenditore() {
+        return statoRivenditore;
+    }
+
+    public void setStatoRivenditore(StatoRivenditore statoRivenditore) {
+        this.statoRivenditore = statoRivenditore;
     }
 
     public Rivenditore getRivenditore() {
@@ -68,5 +80,17 @@ public class Rivenditore {
 
     public void setGetId_biglietto(long getId_biglietto) {
         this.getId_biglietto = getId_biglietto;
+    }
+
+    @Override
+    public String toString() {
+        return "Rivenditore{" +
+                "id_rivenditore=" + id_rivenditore +
+                ", nomeRivenditore='" + nomeRivenditore + '\'' +
+                ", statoRivenditore=" + statoRivenditore +
+                ", rivenditore=" + rivenditore +
+                ", id_biglietto=" + id_biglietto +
+                ", getId_biglietto=" + getId_biglietto +
+                '}';
     }
 }
