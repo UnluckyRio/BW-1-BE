@@ -1,16 +1,26 @@
 package entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "mezzo")
 public class Mezzo {
+    @Id
+    @Column(name = "id")
+    long id;
+
+    @Column(name = "targa", nullable = false, length = 30)
     private int tatga;
+    @Column(name = "tipoMezzo", nullable = false, length = 30)
     private String tipoMezzo;
+    @Column(name = "capienza")
     private int capienza;
+    @Column(name = "statoMezzo", nullable = false, length = 30)
     private String statoMezzo;
+
 
     public Mezzo() {
     }
@@ -22,7 +32,6 @@ public class Mezzo {
         this.statoMezzo = statoMezzo;
     }
 
-    @OneToOne
 
     public int getTatga() {
         return tatga;
