@@ -1,6 +1,13 @@
 package entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
 import java.time.LocalDate;
+
+@Entity
+@Table(name = "tratta")
 
 public class Tratta {
     private Long id;
@@ -16,6 +23,8 @@ public class Tratta {
         this.dataOraInizio = dataOraInizio;
         this.tempo_effettivo = tempo_effettivo;
     }
+
+    @OneToOne
 
     public Long getId() {
         return id;
