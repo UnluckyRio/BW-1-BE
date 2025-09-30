@@ -1,7 +1,8 @@
 package entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
@@ -10,9 +11,13 @@ import java.time.LocalDate;
 @Table(name = "tratta")
 
 public class Tratta {
+    @Id
+    @Column(name = "id")
     private Long id;
+    @Column(name = "dataOraInizio", nullable = false, length = 30)
     private LocalDate dataOraInizio;
-    private int tempo_effettivo;
+    @Column(name = "tempoEffettivo")
+    private int tempoEffettivo;
 
     public Tratta() {
     }
@@ -21,10 +26,9 @@ public class Tratta {
     public Tratta(Long id, LocalDate dataOraInizio, int tempo_effettivo) {
         this.id = id;
         this.dataOraInizio = dataOraInizio;
-        this.tempo_effettivo = tempo_effettivo;
+        this.tempoEffettivo = tempo_effettivo;
     }
 
-    @OneToOne
 
     public Long getId() {
         return id;
@@ -43,11 +47,11 @@ public class Tratta {
     }
 
     public int getTempo_effettivo() {
-        return tempo_effettivo;
+        return tempoEffettivo;
     }
 
     public void setTempo_effettivo(int tempo_effettivo) {
-        this.tempo_effettivo = tempo_effettivo;
+        this.tempoEffettivo = tempo_effettivo;
     }
 
     @Override
@@ -55,7 +59,7 @@ public class Tratta {
         return "Tratta{" +
                 "id=" + id +
                 ", dataOraInizio=" + dataOraInizio +
-                ", tempo_effettivo=" + tempo_effettivo +
+                ", tempo_effettivo=" + tempoEffettivo +
                 '}';
     }
 }
