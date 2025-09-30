@@ -55,7 +55,7 @@ public class UtenteDAO extends BaseDAO<Utente> {
     }
     
     public List<Utente> findUtentiNormali() {
-        return findByRuolo(RuoloUtente.UTENTE);
+        return findByRuolo(RuoloUtente.UTENTE_SEMPLICE);
     }
     
     public List<Utente> findByNomeAndCognome(String nome, String cognome) {

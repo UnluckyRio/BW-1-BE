@@ -43,7 +43,7 @@ public class RivenditoreDAO extends BaseDAO<Rivenditore> {
     }
     
     public List<Rivenditore> findAttivi() {
-        return findByStato(StatoRivenditore.ATTIVO);
+        return findByStato(StatoRivenditore.APERTO);
     }
     
     public List<Rivenditore> findChiusi() {
