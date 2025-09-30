@@ -1,9 +1,8 @@
 package entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import enums.StatoMezzo;
+import enums.TipoMezzo;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "mezzo")
@@ -14,24 +13,29 @@ public class Mezzo {
 
     @Column(name = "targa", nullable = false, length = 30)
     private int tatga;
-    @Column(name = "tipoMezzo", nullable = false, length = 30)
-    private String tipoMezzo;
     @Column(name = "capienza")
     private int capienza;
-    @Column(name = "statoMezzo", nullable = false, length = 30)
-    private String statoMezzo;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "Tipo mezzo", nullable = false, length = 30)
+    private TipoMezzo tipoMezzo;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "Stato Mezzo", nullable = false, length = 30)
+    private StatoMezzo statoMezzo;
 
 
     public Mezzo() {
     }
 
-    public Mezzo(int tatga, String tipoMezzo, int capienza, String statoMezzo) {
+    public Mezzo(int tatga, TipoMezzo tipoMezzo, int capienza, StatoMezzo statoMezzo) {
         this.tatga = tatga;
         this.tipoMezzo = tipoMezzo;
         this.capienza = capienza;
         this.statoMezzo = statoMezzo;
     }
 
+    public long getId() {
+        return id;
+    }
 
     public int getTatga() {
         return tatga;
@@ -39,14 +43,6 @@ public class Mezzo {
 
     public void setTatga(int tatga) {
         this.tatga = tatga;
-    }
-
-    public String getTipoMezzo() {
-        return tipoMezzo;
-    }
-
-    public void setTipoMezzo(String tipoMezzo) {
-        this.tipoMezzo = tipoMezzo;
     }
 
     public int getCapienza() {
@@ -57,21 +53,30 @@ public class Mezzo {
         this.capienza = capienza;
     }
 
-    public String getStatoMezzo() {
+    public TipoMezzo getTipoMezzo() {
+        return tipoMezzo;
+    }
+
+    public void setTipoMezzo(TipoMezzo tipoMezzo) {
+        this.tipoMezzo = tipoMezzo;
+    }
+
+    public StatoMezzo getStatoMezzo() {
         return statoMezzo;
     }
 
-    public void setStatoMezzo(String statoMezzo) {
+    public void setStatoMezzo(StatoMezzo statoMezzo) {
         this.statoMezzo = statoMezzo;
     }
 
     @Override
     public String toString() {
         return "Mezzo{" +
-                "tatga=" + tatga +
-                ", tipoMezzo='" + tipoMezzo + '\'' +
+                "id=" + id +
+                ", tatga=" + tatga +
                 ", capienza=" + capienza +
-                ", statoMezzo='" + statoMezzo + '\'' +
+                ", tipoMezzo=" + tipoMezzo +
+                ", statoMezzo=" + statoMezzo +
                 '}';
     }
 }
