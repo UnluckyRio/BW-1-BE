@@ -1,6 +1,6 @@
 package entities;
 
-import enums.TipoTitoloViaggio;
+
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -15,18 +15,13 @@ public class Biglietto {
     protected LocalDate dataEmissione;
     @Column(name = "prezzo")
     protected double prezzo;
+    @Column(name = "id_rivenditore", nullable = false)
+    protected Rivenditore idrivenditore;
+    @Column(name = "id_distributore", nullable = false)
+    protected DistributoreAutomatico iddistributore;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "biglietto_id", sequenceName = "biglietto_id", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-
-    // @Column(name = "id_rivenditore", nullable = false)
-    //  protected Rivenditore idrivenditore;
-
-
-    // @Column(name = "id_distributore", nullable = false)
-    //  protected Rivenditore iddistributore;
     @Column(name = "Timbrato", nullable = false)
     private boolean timbrato;
 
@@ -43,7 +38,7 @@ public class Biglietto {
     }
 
 
-    public Biglietto(TipoTitoloViaggio tipoTitoloViaggio, LocalDate dataEmissione, double prezzo, boolean timbrato, int durataValidazione, Validazione validazione) {
+    public Biglietto(LocalDate dataEmissione, double prezzo, boolean timbrato, int durataValidazione, Validazione validazione) {
 
         this.id = id;
         this.timbrato = timbrato;
@@ -51,13 +46,44 @@ public class Biglietto {
         this.validazione = validazione;
     }
 
-    
+    public LocalDate getDataEmissione() {
+        return dataEmissione;
+    }
+
+    public void setDataEmissione(LocalDate dataEmissione) {
+        this.dataEmissione = dataEmissione;
+    }
+
+    public double getPrezzo() {
+        return prezzo;
+    }
+
+    public void setPrezzo(double prezzo) {
+        this.prezzo = prezzo;
+    }
+
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Rivenditore getIdrivenditore() {
+        return idrivenditore;
+    }
+
+    public void setIdrivenditore(Rivenditore idrivenditore) {
+        this.idrivenditore = idrivenditore;
+    }
+
+    public DistributoreAutomatico getIddistributore() {
+        return iddistributore;
+    }
+
+    public void setIddistributore(DistributoreAutomatico iddistributore) {
+        this.iddistributore = iddistributore;
     }
 
     public boolean isTimbrato() {
@@ -83,6 +109,4 @@ public class Biglietto {
     public void setValidazione(Validazione validazione) {
         this.validazione = validazione;
     }
-
-
 }

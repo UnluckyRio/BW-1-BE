@@ -1,7 +1,6 @@
 package entities;
 
 import enums.TipoAbbonamento;
-import enums.TipoTitoloViaggio;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -13,8 +12,7 @@ import java.time.LocalDate;
 public class Abbonamento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "abbonamento_id", sequenceName = "abbonamento_id", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
 
 
@@ -25,36 +23,40 @@ public class Abbonamento {
     protected double prezzo;
 
 
-    // @Column(name = "id_rivenditore", nullable = false)
-    //  protected Rivenditore idrivenditore;
+    @Column(name = "id_rivenditore", nullable = false)
+    protected Rivenditore idrivenditore;
 
 
-    // @Column(name = "id_distributore", nullable = false)
-    //  protected Rivenditore iddistributore;
+    @Column(name = "id_distributore", nullable = false)
+    protected DistributoreAutomatico iddistributore;
 
 
     @Column(name = "Tipo abbonamento", nullable = false)
     private TipoAbbonamento tipoAbbonamento;
 
     @Column(name = "Data inizio iscrizione", nullable = false)
-    private LocalDate dataiscrizione;
+    private LocalDate datainiziovalidita;
 
     @Column(name = "Data scadenza iscrizione", nullable = false)
-    private LocalDate datascadenza;
+    private LocalDate datafinevalidita;
 
     @OneToOne
     @JoinColumn(name = "id_validazione")
     private Validazione validazione;
 
-    public Abbonamento(TipoTitoloViaggio tipoTitoloViaggio, LocalDate dataEmissione, double prezzo, TipoAbbonamento tipoAbbonamento, LocalDate dataiscrizione, LocalDate datascadenza, Validazione validazione) {
+
+    public Abbonamento() {
+
+    }
+
+    public Abbonamento(LocalDate dataEmissione, double prezzo, TipoAbbonamento tipoAbbonamento, LocalDate datainiziovalidita, LocalDate datafinevalidita, Validazione validazione) {
 
         this.id = id;
         this.tipoAbbonamento = tipoAbbonamento;
-        this.dataiscrizione = dataiscrizione;
-        this.datascadenza = datascadenza;
+        this.datainiziovalidita = datainiziovalidita;
+        this.datafinevalidita = datafinevalidita;
         this.validazione = validazione;
     }
-
 
     public long getId() {
         return id;
@@ -62,6 +64,22 @@ public class Abbonamento {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public LocalDate getDataEmissione() {
+        return dataEmissione;
+    }
+
+    public void setDataEmissione(LocalDate dataEmissione) {
+        this.dataEmissione = dataEmissione;
+    }
+
+    public double getPrezzo() {
+        return prezzo;
+    }
+
+    public void setPrezzo(double prezzo) {
+        this.prezzo = prezzo;
     }
 
     public TipoAbbonamento getTipoAbbonamento() {
@@ -73,19 +91,19 @@ public class Abbonamento {
     }
 
     public LocalDate getDataiscrizione() {
-        return dataiscrizione;
+        return datainiziovalidita;
     }
 
     public void setDataiscrizione(LocalDate dataiscrizione) {
-        this.dataiscrizione = dataiscrizione;
+        this.datainiziovalidita = dataiscrizione;
     }
 
-    public LocalDate getDatascadenza() {
-        return datascadenza;
+    public LocalDate getDatafinevalidita() {
+        return datafinevalidita;
     }
 
-    public void setDatascadenza(LocalDate datascadenza) {
-        this.datascadenza = datascadenza;
+    public void setDatafinevalidita(LocalDate datafinevalidita) {
+        this.datafinevalidita = datafinevalidita;
     }
 
     public Validazione getValidazione() {
@@ -95,5 +113,4 @@ public class Abbonamento {
     public void setValidazione(Validazione validazione) {
         this.validazione = validazione;
     }
-
 }
