@@ -1,6 +1,6 @@
 package enums;
 
-public enum Ruolo {
+public enum RuoloUtente {
     AMMINISTRATORE,
     UTENTE_SEMPLICE
 }
