@@ -109,4 +109,5 @@ public class Biglietto {
     public void setValidazione(Validazione validazione) {
         this.validazione = validazione;
     }
+
 }
