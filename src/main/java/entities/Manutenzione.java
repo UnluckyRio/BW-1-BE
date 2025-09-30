@@ -18,7 +18,8 @@ public class Manutenzione {
 
     // Costruttore
 
-    public Manutenzione() {
+
+    public Manutenzione(long idManutenzione, long idMezzo, LocalDate dataInizio, LocalDate dataFine) {
         this.idManutenzione = idManutenzione;
         this.idMezzo = idMezzo;
         this.dataInizio = dataInizio;

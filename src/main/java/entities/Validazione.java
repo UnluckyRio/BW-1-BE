@@ -18,7 +18,8 @@ public class Validazione {
 
     // Costruttore
 
-    public Validazione() {
+
+    public Validazione(long idValidazione, long idTitoloDiViaggio, long idMezzo, LocalDate dataValidazione) {
         this.idValidazione = idValidazione;
         this.idTitoloDiViaggio = idTitoloDiViaggio;
         this.idMezzo = idMezzo;
