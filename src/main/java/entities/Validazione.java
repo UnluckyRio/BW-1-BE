@@ -1,29 +1,34 @@
 package entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "validazione")
 
 public class Validazione {
     @Id
     @GeneratedValue
-    protected long idValidazione;
-    protected long idTitoloDiViaggio;
-    protected long idMezzo;
-    protected LocalDate dataValidazione;
+    private long idValidazione;
+    @OneToMany(mappedBy = "idMezzo")
+    private long idMezzo;
+    @ManyToOne
+    @JoinColumn(name = "biglietto_id")
+    private long idBiglietto;
+    @ManyToOne
+    @JoinColumn(name = "tessera_id")
+    private long idTessera;
+    private LocalDate dataOraValidazione;
 
     // Costruttore
 
-
-    public Validazione(long idValidazione, long idTitoloDiViaggio, long idMezzo, LocalDate dataValidazione) {
+    public Validazione(long idValidazione, long idMezzo, long idBiglietto, long idTessera, LocalDate dataOraValidazione) {
         this.idValidazione = idValidazione;
-        this.idTitoloDiViaggio = idTitoloDiViaggio;
         this.idMezzo = idMezzo;
-        this.dataValidazione = dataValidazione;
+        this.idBiglietto = idBiglietto;
+        this.idTessera = idTessera;
+        this.dataOraValidazione = dataOraValidazione;
     }
 
     // Getter & Setter
@@ -36,14 +41,6 @@ public class Validazione {
         this.idValidazione = idValidazione;
     }
 
-    public long getIdTitoloDiViaggio() {
-        return idTitoloDiViaggio;
-    }
-
-    public void setIdTitoloDiViaggio(long idTitoloDiViaggio) {
-        this.idTitoloDiViaggio = idTitoloDiViaggio;
-    }
-
     public long getIdMezzo() {
         return idMezzo;
     }
@@ -52,12 +49,28 @@ public class Validazione {
         this.idMezzo = idMezzo;
     }
 
-    public LocalDate getDataValidazione() {
-        return dataValidazione;
+    public long getIdBiglietto() {
+        return idBiglietto;
     }
 
-    public void setDataValidazione(LocalDate dataValidazione) {
-        this.dataValidazione = dataValidazione;
+    public void setIdBiglietto(long idBiglietto) {
+        this.idBiglietto = idBiglietto;
+    }
+
+    public long getIdTessera() {
+        return idTessera;
+    }
+
+    public void setIdTessera(long idTessera) {
+        this.idTessera = idTessera;
+    }
+
+    public LocalDate getDataOraValidazione() {
+        return dataOraValidazione;
+    }
+
+    public void setDataOraValidazione(LocalDate dataOraValidazione) {
+        this.dataOraValidazione = dataOraValidazione;
     }
 
     // toString
@@ -66,9 +79,10 @@ public class Validazione {
     public String toString() {
         return "Validazione{" +
                 "idValidazione=" + idValidazione +
-                ", idTitoloDiViaggio=" + idTitoloDiViaggio +
                 ", idMezzo=" + idMezzo +
-                ", dataValidazione=" + dataValidazione +
+                ", idBiglietto=" + idBiglietto +
+                ", idTessera=" + idTessera +
+                ", dataOraValidazione=" + dataOraValidazione +
                 '}';
     }
 }
