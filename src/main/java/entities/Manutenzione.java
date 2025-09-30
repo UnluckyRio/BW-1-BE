@@ -1,23 +1,26 @@
 package entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "manutenzione")
 
 public class Manutenzione {
     @Id
-    @GeneratedValue
-    protected long idManutenzione;
-    protected long idMezzo;
-    protected LocalDate dataInizio;
-    protected LocalDate dataFine;
+    @ManyToOne
+    @JoinColumn(name = "manutenzione_id")
+    private long idManutenzione;
+    @OneToMany(mappedBy = "idMezzo")
+    private long idMezzo;
+    private LocalDate dataInizio;
+    private LocalDate dataFine;
 
     // Costruttore
 
+    public Manutenzione() {
+    }
 
     public Manutenzione(long idManutenzione, long idMezzo, LocalDate dataInizio, LocalDate dataFine) {
         this.idManutenzione = idManutenzione;

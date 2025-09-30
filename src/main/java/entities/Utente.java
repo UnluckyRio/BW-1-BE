@@ -1,6 +1,6 @@
 package entities;
 
-import enums.Ruolo;
+import enums.RuoloUtente;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,26 +19,22 @@ public class Utente {
     @Column(name = "Username", nullable = false, length = 10)
     private String username;
 
-    @Column(name = "Password", nullable = false, length = 12)
-    private int password;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "Ruolo", nullable = false)
-    private Ruolo ruolo;
+    private RuoloUtente ruoloUtente;
 
-    @JoinColumn(name = "Titolo_viaggio_id")
-    private TitoloDiViaggio titoloViaggioId;
+    @JoinColumn(name = "Tessera_id")
+    private Tessera tesseraId;
 
     public Utente() {
     }
 
-    public Utente(String nome, String cognome, String username, int password, Ruolo ruolo, TitoloDiViaggio titoloViaggioId) {
+    public Utente(String nome, String cognome, String username, RuoloUtente ruoloUtente, Tessera tesseraId) {
         this.nome = nome;
         this.cognome = cognome;
         this.username = username;
-        this.password = password;
-        this.ruolo = ruolo;
-        this.titoloViaggioId = titoloViaggioId;
+        this.ruoloUtente = ruoloUtente;
+        this.tesseraId = tesseraId;
     }
 
     public long getId() {
@@ -69,24 +65,20 @@ public class Utente {
         this.username = username;
     }
 
-    public int getPassword() {
-        return password;
+    public RuoloUtente getRuolo() {
+        return ruoloUtente;
     }
 
-    public void setPassword(int password) {
-        this.password = password;
+    public void setRuolo(RuoloUtente ruoloUtente) {
+        this.ruoloUtente = ruoloUtente;
     }
 
-    public Ruolo getRuolo() {
-        return ruolo;
+    public Tessera getTessera() {
+        return tesseraId;
     }
 
-    public void setRuolo(Ruolo ruolo) {
-        this.ruolo = ruolo;
-    }
-
-    public TitoloDiViaggio getTitoloViaggioId() {
-        return titoloViaggioId;
+    public void setTessera(Tessera tessera) {
+        this.tesseraId = tessera;
     }
 
     @Override
@@ -96,9 +88,8 @@ public class Utente {
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
                 ", username='" + username + '\'' +
-                ", password=" + password +
-                ", ruolo=" + ruolo +
-                ", titoloViaggioId=" + titoloViaggioId +
+                ", ruolo=" + ruoloUtente +
+                ", tessera=" + tesseraId +
                 '}';
     }
 }
