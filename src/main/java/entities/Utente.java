@@ -2,43 +2,49 @@ package entities;
 
 import enums.RuoloUtente;
 import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "Utente")
+@Table(name = "utente")
 public class Utente {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "id_utente")
+    private Long id;
 
-    @Column(name = "Nome", nullable = false, length = 10)
+    @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(name = "Cognome", nullable = false, length = 10)
+    @Column(name = "cognome", nullable = false)
     private String cognome;
 
-    @Column(name = "Username", nullable = false, length = 10)
-    private String username;
+    @Column(name = "data_nascita", nullable = false)
+    private LocalDate dataNascita;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "Ruolo", nullable = false)
-    private RuoloUtente ruoloUtente;
+    @Column(name = "ruolo", nullable = false)
+    private RuoloUtente ruolo;
 
-    @JoinColumn(name = "Tessera_id")
-    private Tessera tesseraId;
+    @OneToOne(mappedBy = "utente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Tessera tessera;
 
     public Utente() {
     }
 
-    public Utente(String nome, String cognome, String username, RuoloUtente ruoloUtente, Tessera tesseraId) {
+    public Utente(String nome, String cognome, LocalDate dataNascita, RuoloUtente ruolo) {
         this.nome = nome;
         this.cognome = cognome;
-        this.username = username;
-        this.ruoloUtente = ruoloUtente;
-        this.tesseraId = tesseraId;
+        this.dataNascita = dataNascita;
+        this.ruolo = ruolo;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -57,28 +63,28 @@ public class Utente {
         this.cognome = cognome;
     }
 
-    public String getUsername() {
-        return username;
+    public LocalDate getDataNascita() {
+        return dataNascita;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setDataNascita(LocalDate dataNascita) {
+        this.dataNascita = dataNascita;
     }
 
     public RuoloUtente getRuolo() {
-        return ruoloUtente;
+        return ruolo;
     }
 
-    public void setRuolo(RuoloUtente ruoloUtente) {
-        this.ruoloUtente = ruoloUtente;
+    public void setRuolo(RuoloUtente ruolo) {
+        this.ruolo = ruolo;
     }
 
     public Tessera getTessera() {
-        return tesseraId;
+        return tessera;
     }
 
     public void setTessera(Tessera tessera) {
-        this.tesseraId = tessera;
+        this.tessera = tessera;
     }
 
     @Override
@@ -87,9 +93,8 @@ public class Utente {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
-                ", username='" + username + '\'' +
-                ", ruolo=" + ruoloUtente +
-                ", tessera=" + tesseraId +
+                ", dataNascita=" + dataNascita +
+                ", ruolo=" + ruolo +
                 '}';
     }
 }

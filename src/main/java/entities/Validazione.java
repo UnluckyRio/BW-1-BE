@@ -1,91 +1,95 @@
 package entities;
 
 import jakarta.persistence.*;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "validazione")
-
 public class Validazione {
+    
     @Id
-    @GeneratedValue
-    private long idValidazione;
-    @OneToMany(mappedBy = "idMezzo")
-    private long idMezzo;
-    @ManyToOne
-    @JoinColumn(name = "biglietto_id")
-    private long idBiglietto;
-    @ManyToOne
-    @JoinColumn(name = "tessera_id")
-    private long idTessera;
-    private LocalDate dataOraValidazione;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_validazione")
+    private Long id;
 
-    // Costruttore
+    @Column(name = "data_ora_validazione", nullable = false)
+    private LocalDateTime dataOraValidazione;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_mezzo", nullable = false)
+    private Mezzo mezzo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_biglietto")
+    private Biglietto biglietto;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_tessera")
+    private Tessera tessera;
 
     public Validazione() {
     }
 
-    public Validazione(long idValidazione, long idMezzo, long idBiglietto, long idTessera, LocalDate dataOraValidazione) {
-        this.idValidazione = idValidazione;
-        this.idMezzo = idMezzo;
-        this.idBiglietto = idBiglietto;
-        this.idTessera = idTessera;
+    public Validazione(LocalDateTime dataOraValidazione, Mezzo mezzo, Biglietto biglietto) {
         this.dataOraValidazione = dataOraValidazione;
+        this.mezzo = mezzo;
+        this.biglietto = biglietto;
     }
 
-    // Getter & Setter
-
-    public long getIdValidazione() {
-        return idValidazione;
+    public Validazione(LocalDateTime dataOraValidazione, Mezzo mezzo, Tessera tessera) {
+        this.dataOraValidazione = dataOraValidazione;
+        this.mezzo = mezzo;
+        this.tessera = tessera;
     }
 
-    public void setIdValidazione(long idValidazione) {
-        this.idValidazione = idValidazione;
+    public Long getId() {
+        return id;
     }
 
-    public long getIdMezzo() {
-        return idMezzo;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setIdMezzo(long idMezzo) {
-        this.idMezzo = idMezzo;
-    }
-
-    public long getIdBiglietto() {
-        return idBiglietto;
-    }
-
-    public void setIdBiglietto(long idBiglietto) {
-        this.idBiglietto = idBiglietto;
-    }
-
-    public long getIdTessera() {
-        return idTessera;
-    }
-
-    public void setIdTessera(long idTessera) {
-        this.idTessera = idTessera;
-    }
-
-    public LocalDate getDataOraValidazione() {
+    public LocalDateTime getDataOraValidazione() {
         return dataOraValidazione;
     }
 
-    public void setDataOraValidazione(LocalDate dataOraValidazione) {
+    public void setDataOraValidazione(LocalDateTime dataOraValidazione) {
         this.dataOraValidazione = dataOraValidazione;
     }
 
-    // toString
+    public Mezzo getMezzo() {
+        return mezzo;
+    }
+
+    public void setMezzo(Mezzo mezzo) {
+        this.mezzo = mezzo;
+    }
+
+    public Biglietto getBiglietto() {
+        return biglietto;
+    }
+
+    public void setBiglietto(Biglietto biglietto) {
+        this.biglietto = biglietto;
+    }
+
+    public Tessera getTessera() {
+        return tessera;
+    }
+
+    public void setTessera(Tessera tessera) {
+        this.tessera = tessera;
+    }
 
     @Override
     public String toString() {
         return "Validazione{" +
-                "idValidazione=" + idValidazione +
-                ", idMezzo=" + idMezzo +
-                ", idBiglietto=" + idBiglietto +
-                ", idTessera=" + idTessera +
+                "id=" + id +
                 ", dataOraValidazione=" + dataOraValidazione +
+                ", mezzo=" + (mezzo != null ? mezzo.getId() : null) +
+                ", biglietto=" + (biglietto != null ? biglietto.getId() : null) +
+                ", tessera=" + (tessera != null ? tessera.getId() : null) +
                 '}';
     }
 }
