@@ -1,5 +1,11 @@
 package entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "mezzo")
 public class Mezzo {
     private int tatga;
     private String tipoMezzo;
@@ -15,6 +21,8 @@ public class Mezzo {
         this.capienza = capienza;
         this.statoMezzo = statoMezzo;
     }
+
+    @OneToOne
 
     public int getTatga() {
         return tatga;
