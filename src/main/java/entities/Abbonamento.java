@@ -2,10 +2,12 @@ package entities;
 
 import enums.TipoAbbonamento;
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "abbonamento")
+@Table(name = "Abbonamento")
+
 
 public class Abbonamento {
 
@@ -15,29 +17,15 @@ public class Abbonamento {
 
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_abbonamento", nullable = false)
+    @Column(name = "Tipo abbonamento", nullable = false)
     private TipoAbbonamento tipoAbbonamento;
 
-    @Column(name = "Data inizio validità", nullable = false)
+    @Column(name = "Data inizio iscrizione", nullable = false)
     private LocalDate datainiziovalidita;
 
-    @Column(name = "Data scadenza validità", nullable = false)
+    @Column(name = "Data scadenza iscrizione", nullable = false)
     private LocalDate datafinevalidita;
 
-    @Column(name = "zona_validita", nullable = false)
-    private String zonaValidita;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_tessera", nullable = false)
-    private Tessera tessera;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_distributore_automatico")
-    private DistributoreAutomatico distributoreAutomatico;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_rivenditore")
-    private Rivenditore rivenditore;
 
     @Column(name = "Data Emissione")
     private LocalDate dataEmissione;
@@ -60,7 +48,7 @@ public class Abbonamento {
 
 
     public Abbonamento() {
-        super();
+
     }
 
     public Abbonamento(TipoAbbonamento tipoAbbonamento, LocalDate datainiziovalidita, LocalDate datafinevalidita, LocalDate dataEmissione, double prezzo) {
@@ -114,12 +102,12 @@ public class Abbonamento {
         this.dataEmissione = dataEmissione;
     }
 
-    public LocalDate getDataScadenza() {
-        return dataScadenza;
+    public double getPrezzo() {
+        return prezzo;
     }
 
-    public void setDataScadenza(LocalDate dataScadenza) {
-        this.dataScadenza = dataScadenza;
+    public void setPrezzo(double prezzo) {
+        this.prezzo = prezzo;
     }
 
     public Tessera getTessera() {

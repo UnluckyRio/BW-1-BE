@@ -1,47 +1,41 @@
 package entities;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
-import java.util.List;
+
 
 @Entity
-@Table(name = "tessera")
-public class Tessera extends TitoloViaggio {
-
-    @Column(name = "data_emissione", nullable = false)
+@Table(name = "Tessera")
+public class Tessera {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name = "Data Emissione", nullable = false)
     private LocalDate dataEmissione;
-
-    @Column(name = "data_scadenza", nullable = false)
+    @Column(name = "Data Scadenza", nullable = false)
     private LocalDate dataScadenza;
-
-    @Column(name = "attiva", nullable = false)
-    private boolean attiva;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_utente", nullable = false)
-    private Utente utente;
-
-    @OneToMany(mappedBy = "tessera", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Abbonamento> abbonamenti;
+    @JoinColumn(name = "Utente_Id")
+    private Utente idUtente;
 
     public Tessera() {
-        super();
     }
 
-    public Tessera(LocalDate dataEmissione, LocalDate dataScadenza, boolean attiva, Utente utente) {
-        super();
+    public Tessera(LocalDate dataEmissione, LocalDate dataScadenza) {
         this.dataEmissione = dataEmissione;
         this.dataScadenza = dataScadenza;
-        this.attiva = attiva;
-        this.utente = utente;
     }
 
-    public LocalDate getDataEmissione() {
-        return dataEmissione;
+    public long getId() {
+        return id;
     }
 
-    public void setDataEmissione(LocalDate dataEmissione) {
-        this.dataEmissione = dataEmissione;
+    public Utente getIdUtente() {
+        return idUtente;
+    }
+
+    public void setIdUtente(Utente idUtente) {
+        this.idUtente = idUtente;
     }
 
     public LocalDate getDataScadenza() {
@@ -52,38 +46,21 @@ public class Tessera extends TitoloViaggio {
         this.dataScadenza = dataScadenza;
     }
 
-    public boolean isAttiva() {
-        return attiva;
+    public LocalDate getDataEmissione() {
+        return dataEmissione;
     }
 
-    public void setAttiva(boolean attiva) {
-        this.attiva = attiva;
-    }
-
-    public Utente getUtente() {
-        return utente;
-    }
-
-    public void setUtente(Utente utente) {
-        this.utente = utente;
-    }
-
-    public List<Abbonamento> getAbbonamenti() {
-        return abbonamenti;
-    }
-
-    public void setAbbonamenti(List<Abbonamento> abbonamenti) {
-        this.abbonamenti = abbonamenti;
+    public void setDataEmissione(LocalDate dataEmissione) {
+        this.dataEmissione = dataEmissione;
     }
 
     @Override
     public String toString() {
         return "Tessera{" +
-                "id=" + getId() +
+                "id=" + id +
                 ", dataEmissione=" + dataEmissione +
                 ", dataScadenza=" + dataScadenza +
-                ", attiva=" + attiva +
-                ", utente=" + (utente != null ? utente.getId() : null) +
+                ", idUtente=" + idUtente +
                 '}';
     }
 }

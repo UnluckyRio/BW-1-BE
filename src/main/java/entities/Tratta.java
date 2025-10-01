@@ -1,46 +1,34 @@
 package entities;
 
-import jakarta.persistence.*;
-import java.time.LocalTime;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "tratta")
+
 public class Tratta {
-    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_tratta")
+    @Column(name = "id")
     private Long id;
-
-    @Column(name = "zona_partenza", nullable = false)
-    private String zonaPartenza;
-
-    @Column(name = "capolinea", nullable = false)
-    private String capolinea;
-
-    @Column(name = "tempo_previsto", nullable = false)
-    private LocalTime tempoPrevisto;
-
-    @Column(name = "tempo_effettivo")
-    private LocalTime tempoEffettivo;
-
-    @Column(name = "completata", nullable = false)
-    private boolean completata;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_mezzo", nullable = false)
-    private Mezzo mezzo;
+    @Column(name = "dataOraInizio", nullable = false, length = 30)
+    private LocalDate dataOraInizio;
+    @Column(name = "tempoEffettivo")
+    private int tempoEffettivo;
 
     public Tratta() {
     }
 
-    public Tratta(String zonaPartenza, String capolinea, LocalTime tempoPrevisto, Mezzo mezzo) {
-        this.zonaPartenza = zonaPartenza;
-        this.capolinea = capolinea;
-        this.tempoPrevisto = tempoPrevisto;
-        this.mezzo = mezzo;
-        this.completata = false;
+
+    public Tratta(Long id, LocalDate dataOraInizio, int tempo_effettivo) {
+        this.id = id;
+        this.dataOraInizio = dataOraInizio;
+        this.tempoEffettivo = tempo_effettivo;
     }
+
 
     public Long getId() {
         return id;
@@ -50,63 +38,28 @@ public class Tratta {
         this.id = id;
     }
 
-    public String getZonaPartenza() {
-        return zonaPartenza;
+    public LocalDate getDataOraInizio() {
+        return dataOraInizio;
     }
 
-    public void setZonaPartenza(String zonaPartenza) {
-        this.zonaPartenza = zonaPartenza;
+    public void setDataOraInizio(LocalDate dataOraInizio) {
+        this.dataOraInizio = dataOraInizio;
     }
 
-    public String getCapolinea() {
-        return capolinea;
-    }
-
-    public void setCapolinea(String capolinea) {
-        this.capolinea = capolinea;
-    }
-
-    public LocalTime getTempoPrevisto() {
-        return tempoPrevisto;
-    }
-
-    public void setTempoPrevisto(LocalTime tempoPrevisto) {
-        this.tempoPrevisto = tempoPrevisto;
-    }
-
-    public LocalTime getTempoEffettivo() {
+    public int getTempo_effettivo() {
         return tempoEffettivo;
     }
 
-    public void setTempoEffettivo(LocalTime tempoEffettivo) {
-        this.tempoEffettivo = tempoEffettivo;
-    }
-
-    public boolean isCompletata() {
-        return completata;
-    }
-
-    public void setCompletata(boolean completata) {
-        this.completata = completata;
-    }
-
-    public Mezzo getMezzo() {
-        return mezzo;
-    }
-
-    public void setMezzo(Mezzo mezzo) {
-        this.mezzo = mezzo;
+    public void setTempo_effettivo(int tempo_effettivo) {
+        this.tempoEffettivo = tempo_effettivo;
     }
 
     @Override
     public String toString() {
         return "Tratta{" +
                 "id=" + id +
-                ", zonaPartenza='" + zonaPartenza + '\'' +
-                ", capolinea='" + capolinea + '\'' +
-                ", tempoPrevisto=" + tempoPrevisto +
-                ", tempoEffettivo=" + tempoEffettivo +
-                ", completata=" + completata +
+                ", dataOraInizio=" + dataOraInizio +
+                ", tempo_effettivo=" + tempoEffettivo +
                 '}';
     }
 }

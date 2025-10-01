@@ -1,23 +1,23 @@
 package entities;
 
+
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "biglietto")
-public class Biglietto extends TitoloViaggio {
+@Table(name = "Biglietto")
 
-    @Column(name = "data_emissione", nullable = false)
-    private LocalDate dataEmissione;
 
 public class Biglietto {
+
+    @Column(name = "prezzo")
+    private double prezzo;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "Durata biglietto", nullable = false)
-    private int durataBiglietto;
-    @Column(name = "prezzo")
-    private double prezzo;
+    @Column(name = "durata validazione", nullable = false)
+    private int durataValidazione;
     @Column(name = "Data Emissione")
     private LocalDate dataEmissione;
 
@@ -29,51 +29,44 @@ public class Biglietto {
     @JoinColumn(name = "id_rivenditore", nullable = false)
     private Rivenditore rivenditore;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_distributore_automatico")
-    private DistributoreAutomatico distributoreAutomatico;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_rivenditore")
-    private Rivenditore rivenditore;
 
     public Biglietto() {
-        super();
+
     }
 
 
-    public Biglietto(double prezzo, int durataBiglietto, LocalDate dataEmissione) {
+    public Biglietto(double prezzo, int durataValidazione, LocalDate dataEmissione) {
 
         this.id = id;
-        this.durataBiglietto = durataBiglietto;
+        this.durataValidazione = durataValidazione;
         this.prezzo = prezzo;
         this.dataEmissione = dataEmissione;
 
 
     }
 
-    public LocalDate getDataScadenza() {
-        return dataScadenza;
+    public double getPrezzo() {
+        return prezzo;
     }
 
-    public void setDataScadenza(LocalDate dataScadenza) {
-        this.dataScadenza = dataScadenza;
+    public void setPrezzo(double prezzo) {
+        this.prezzo = prezzo;
     }
 
-    public boolean isValidato() {
-        return validato;
+    public long getId() {
+        return id;
     }
 
-    public void setValidato(boolean validato) {
-        this.validato = validato;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public int getDurataBiglietto() {
-        return durataBiglietto;
+    public int getDurataValidazione() {
+        return durataValidazione;
     }
 
-    public void setDurataBiglietto(int durataBiglietto) {
-        this.durataBiglietto = durataBiglietto;
+    public void setDurataValidazione(int durataValidazione) {
+        this.durataValidazione = durataValidazione;
     }
 
     public LocalDate getDataEmissione() {
@@ -103,9 +96,9 @@ public class Biglietto {
     @Override
     public String toString() {
         return "Biglietto{" +
-                "id=" + id +
-                ", durataBiglietto=" + durataBiglietto +
-                ", prezzo=" + prezzo +
+                "prezzo=" + prezzo +
+                ", id=" + id +
+                ", durataValidazione=" + durataValidazione +
                 ", dataEmissione=" + dataEmissione +
                 ", distributore=" + distributore +
                 ", rivenditore=" + rivenditore +
