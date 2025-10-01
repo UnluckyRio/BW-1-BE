@@ -3,54 +3,58 @@ package entities;
 import enums.StatoMezzo;
 import enums.TipoMezzo;
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "mezzo")
 public class Mezzo {
+    
     @Id
-    @Column(name = "id")
-    long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_mezzo")
+    private Long id;
 
-    @Column(name = "targa", nullable = false, length = 30)
-    private int tatga;
-    @Column(name = "capienza")
-    private int capienza;
+    @Column(name = "targa", nullable = false, unique = true)
+    private String targa;
+
     @Enumerated(EnumType.STRING)
-    @Column(name = "Tipo mezzo", nullable = false, length = 30)
+    @Column(name = "tipo_mezzo", nullable = false)
     private TipoMezzo tipoMezzo;
+
     @Enumerated(EnumType.STRING)
-    @Column(name = "Stato Mezzo", nullable = false, length = 30)
+    @Column(name = "stato_mezzo", nullable = false)
     private StatoMezzo statoMezzo;
 
+    @Column(name = "capienza", nullable = false)
+    private int capienza;
+
+    @OneToMany(mappedBy = "mezzo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Tratta> tratte;
 
     public Mezzo() {
     }
 
-    public Mezzo(int tatga, TipoMezzo tipoMezzo, int capienza, StatoMezzo statoMezzo) {
-        this.tatga = tatga;
+    public Mezzo(String targa, TipoMezzo tipoMezzo, StatoMezzo statoMezzo, int capienza) {
+        this.targa = targa;
         this.tipoMezzo = tipoMezzo;
-        this.capienza = capienza;
         this.statoMezzo = statoMezzo;
+        this.capienza = capienza;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public int getTatga() {
-        return tatga;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setTatga(int tatga) {
-        this.tatga = tatga;
+    public String getTarga() {
+        return targa;
     }
 
-    public int getCapienza() {
-        return capienza;
-    }
-
-    public void setCapienza(int capienza) {
-        this.capienza = capienza;
+    public void setTarga(String targa) {
+        this.targa = targa;
     }
 
     public TipoMezzo getTipoMezzo() {
@@ -69,14 +73,30 @@ public class Mezzo {
         this.statoMezzo = statoMezzo;
     }
 
+    public int getCapienza() {
+        return capienza;
+    }
+
+    public void setCapienza(int capienza) {
+        this.capienza = capienza;
+    }
+
+    public List<Tratta> getTratte() {
+        return tratte;
+    }
+
+    public void setTratte(List<Tratta> tratte) {
+        this.tratte = tratte;
+    }
+
     @Override
     public String toString() {
         return "Mezzo{" +
                 "id=" + id +
-                ", tatga=" + tatga +
-                ", capienza=" + capienza +
+                ", targa='" + targa + '\'' +
                 ", tipoMezzo=" + tipoMezzo +
                 ", statoMezzo=" + statoMezzo +
+                ", capienza=" + capienza +
                 '}';
     }
 }

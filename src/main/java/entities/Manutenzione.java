@@ -1,50 +1,47 @@
 package entities;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "manutenzione")
-
 public class Manutenzione {
+    
     @Id
-    @ManyToOne
-    @JoinColumn(name = "manutenzione_id")
-    private long idManutenzione;
-    @OneToMany(mappedBy = "idMezzo")
-    private long idMezzo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_manutenzione")
+    private Long idManutenzione;
+
+    @Column(name = "data_inizio", nullable = false)
     private LocalDate dataInizio;
+
+    @Column(name = "data_fine")
     private LocalDate dataFine;
 
-    // Costruttore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_mezzo", nullable = false)
+    private Mezzo mezzo;
 
     public Manutenzione() {
     }
 
-    public Manutenzione(long idManutenzione, long idMezzo, LocalDate dataInizio, LocalDate dataFine) {
-        this.idManutenzione = idManutenzione;
-        this.idMezzo = idMezzo;
+    public Manutenzione(LocalDate dataInizio, Mezzo mezzo) {
         this.dataInizio = dataInizio;
-        this.dataFine = dataFine;
+        this.mezzo = mezzo;
     }
 
-    // Getter & Setter
+    public Manutenzione(LocalDate dataInizio, LocalDate dataFine, Mezzo mezzo) {
+        this.dataInizio = dataInizio;
+        this.dataFine = dataFine;
+        this.mezzo = mezzo;
+    }
 
-    public long getIdManutenzione() {
+    public Long getIdManutenzione() {
         return idManutenzione;
     }
 
-    public void setIdManutenzione(long idManutenzione) {
+    public void setIdManutenzione(Long idManutenzione) {
         this.idManutenzione = idManutenzione;
-    }
-
-    public long getIdMezzo() {
-        return idMezzo;
-    }
-
-    public void setIdMezzo(long idMezzo) {
-        this.idMezzo = idMezzo;
     }
 
     public LocalDate getDataInizio() {
@@ -63,15 +60,21 @@ public class Manutenzione {
         this.dataFine = dataFine;
     }
 
-    // toString
+    public Mezzo getMezzo() {
+        return mezzo;
+    }
+
+    public void setMezzo(Mezzo mezzo) {
+        this.mezzo = mezzo;
+    }
 
     @Override
     public String toString() {
         return "Manutenzione{" +
                 "idManutenzione=" + idManutenzione +
-                ", idMezzo=" + idMezzo +
                 ", dataInizio=" + dataInizio +
                 ", dataFine=" + dataFine +
+                ", mezzo=" + (mezzo != null ? mezzo.getId() : null) +
                 '}';
     }
 }
