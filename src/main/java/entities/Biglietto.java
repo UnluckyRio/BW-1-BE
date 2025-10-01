@@ -10,14 +10,13 @@ import java.time.LocalDate;
 
 
 public class Biglietto {
-
-    @Column(name = "prezzo")
-    private double prezzo;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "durata validazione", nullable = false)
     private int durataValidazione;
+    @Column(name = "prezzo")
+    private double prezzo;
     @Column(name = "Data Emissione")
     private LocalDate dataEmissione;
 

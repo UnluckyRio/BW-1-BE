@@ -20,10 +20,10 @@ public class Abbonamento {
     @Column(name = "Tipo abbonamento", nullable = false)
     private TipoAbbonamento tipoAbbonamento;
 
-    @Column(name = "Data inizio validita", nullable = false)
+    @Column(name = "Data inizio validità", nullable = false)
     private LocalDate datainiziovalidita;
 
-    @Column(name = "Data scadenza validata", nullable = false)
+    @Column(name = "Data scadenza validità", nullable = false)
     private LocalDate datafinevalidita;
 
 
