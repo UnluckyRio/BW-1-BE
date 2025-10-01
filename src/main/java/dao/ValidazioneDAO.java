@@ -2,7 +2,6 @@ package dao;
 
 import entities.Mezzo;
 import entities.Tessera;
-import entities.Validazione;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 

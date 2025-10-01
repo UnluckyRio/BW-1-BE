@@ -10,79 +10,77 @@ import java.time.LocalDate;
 
 
 public class Biglietto {
-
-    @Column(name = "prezzo")
-    private double prezzo;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "durata validazione", nullable = false)
-    private int durataValidazione;
+    @Column(name = "durata biglietto", nullable = false)
+    private int durataBiglietto;
+    @Column(name = "prezzo")
+    private double prezzo;
     @Column(name = "Data Emissione")
     private LocalDate dataEmissione;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_distributore", nullable = false)
     private DistributoreAutomatico distributore;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_rivenditore", nullable = false)
     private Rivenditore rivenditore;
+
+    @Column(name= "Validazione", nullable = false)
+    private boolean validazione;
+    @Column(name= "Data validazione", nullable = false)
+    private LocalDate dataValidazione;
+
+    @ManyToOne
+    @JoinColumn(name = "id_mezzo_validante", nullable = false)
+    private Mezzo mezzo;
 
 
     public Biglietto() {
 
     }
 
-
-    public Biglietto(double prezzo, int durataValidazione, LocalDate dataEmissione) {
-
-        this.id = id;
-        this.durataValidazione = durataValidazione;
+    public Biglietto( int durataBiglietto, double prezzo,  LocalDate dataEmissione,DistributoreAutomatico distributore, Rivenditore rivenditore, boolean validazione, LocalDate dataValidazione, Mezzo mezzo ) {
         this.prezzo = prezzo;
+        this.durataBiglietto = durataBiglietto;
         this.dataEmissione = dataEmissione;
+        this.distributore = distributore;
+        this.rivenditore = rivenditore;
+        this.validazione = validazione;
+        this.dataValidazione = dataValidazione;
+        this.mezzo = mezzo;
 
 
-    }
-
-    public double getPrezzo() {
-        return prezzo;
-    }
-
-    public void setPrezzo(double prezzo) {
-        this.prezzo = prezzo;
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public Mezzo getMezzoId() {
+        return mezzo;
     }
 
-    public int getDurataValidazione() {
-        return durataValidazione;
+    public void setMezzoId(Mezzo mezzo) {
+        this.mezzo = mezzo;
     }
 
-    public void setDurataValidazione(int durataValidazione) {
-        this.durataValidazione = durataValidazione;
+    public LocalDate getDataValidazione() {
+        return dataValidazione;
     }
 
-    public LocalDate getDataEmissione() {
-        return dataEmissione;
+    public void setDataValidazione(LocalDate dataValidazione) {
+        this.dataValidazione = dataValidazione;
     }
 
-    public void setDataEmissione(LocalDate dataEmissione) {
-        this.dataEmissione = dataEmissione;
+    public boolean isValidazione() {
+        return validazione;
     }
 
-    public DistributoreAutomatico getDistributore() {
-        return distributore;
-    }
-
-    public void setDistributore(DistributoreAutomatico distributore) {
-        this.distributore = distributore;
+    public void setValidazione(boolean validazione) {
+        this.validazione = validazione;
     }
 
     public Rivenditore getRivenditore() {
@@ -93,15 +91,50 @@ public class Biglietto {
         this.rivenditore = rivenditore;
     }
 
+    public LocalDate getDataEmissione() {
+        return dataEmissione;
+    }
+
+    public void setDataEmissione(LocalDate dataEmissione) {
+        this.dataEmissione = dataEmissione;
+    }
+
+    public double getPrezzo() {
+        return prezzo;
+    }
+
+    public void setPrezzo(double prezzo) {
+        this.prezzo = prezzo;
+    }
+
+    public int getDurataBiglietto() {
+        return durataBiglietto;
+    }
+
+    public void setDurataBiglietto(int durataBiglietto) {
+        this.durataBiglietto = durataBiglietto;
+    }
+
+    public DistributoreAutomatico getDistributore() {
+        return distributore;
+    }
+
+    public void setDistributore(DistributoreAutomatico distributore) {
+        this.distributore = distributore;
+    }
+
     @Override
     public String toString() {
         return "Biglietto{" +
-                "prezzo=" + prezzo +
-                ", id=" + id +
-                ", durataValidazione=" + durataValidazione +
+                "id=" + id +
+                ", durataBiglietto=" + durataBiglietto +
+                ", prezzo=" + prezzo +
                 ", dataEmissione=" + dataEmissione +
                 ", distributore=" + distributore +
                 ", rivenditore=" + rivenditore +
+                ", validazione=" + validazione +
+                ", dataValidazione=" + dataValidazione +
+                ", mezzo=" + mezzo +
                 '}';
     }
 }

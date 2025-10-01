@@ -4,30 +4,38 @@ import enums.StatoMezzo;
 import enums.TipoMezzo;
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "mezzo")
-public class Mezzo {
-    @Id
-    @Column(name = "id")
-    long id;
+import java.util.List;
 
-    @Column(name = "targa", nullable = false, length = 30)
-    private int tatga;
+@Entity
+@Table(name = "Mezzo")
+public class Mezzo {
+
+    @Id
+    @Column(name = "id mezzo")
+    private long id;
+
+    @Column(name = "targa", nullable = false, length = 7)
+    private String targa;
+
     @Column(name = "capienza")
     private int capienza;
+
     @Enumerated(EnumType.STRING)
-    @Column(name = "Tipo mezzo", nullable = false, length = 30)
+    @Column(name = "Tipo mezzo", nullable = false)
     private TipoMezzo tipoMezzo;
+
     @Enumerated(EnumType.STRING)
-    @Column(name = "Stato Mezzo", nullable = false, length = 30)
+    @Column(name = "Stato Mezzo", nullable = false)
     private StatoMezzo statoMezzo;
 
+    @OneToMany(mappedBy = "mezzoValidante")
+    private List<Biglietto> bigliettiValidati;
 
     public Mezzo() {
     }
 
-    public Mezzo(int tatga, TipoMezzo tipoMezzo, int capienza, StatoMezzo statoMezzo) {
-        this.tatga = tatga;
+    public Mezzo(String targa, TipoMezzo tipoMezzo, int capienza, StatoMezzo statoMezzo) {
+        this.targa = targa;
         this.tipoMezzo = tipoMezzo;
         this.capienza = capienza;
         this.statoMezzo = statoMezzo;
@@ -37,12 +45,12 @@ public class Mezzo {
         return id;
     }
 
-    public int getTatga() {
-        return tatga;
+    public String getTarga() {
+        return targa;
     }
 
-    public void setTatga(int tatga) {
-        this.tatga = tatga;
+    public void setTarga(String targa) {
+        this.targa = targa;
     }
 
     public int getCapienza() {
@@ -69,11 +77,19 @@ public class Mezzo {
         this.statoMezzo = statoMezzo;
     }
 
+    public List<Biglietto> getBigliettiValidati() {
+        return bigliettiValidati;
+    }
+
+    public void setBigliettiValidati(List<Biglietto> bigliettiValidati) {
+        this.bigliettiValidati = bigliettiValidati;
+    }
+
     @Override
     public String toString() {
         return "Mezzo{" +
                 "id=" + id +
-                ", tatga=" + tatga +
+                ", targa='" + targa + '\'' +
                 ", capienza=" + capienza +
                 ", tipoMezzo=" + tipoMezzo +
                 ", statoMezzo=" + statoMezzo +
