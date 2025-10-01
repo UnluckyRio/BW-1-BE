@@ -1,52 +1,76 @@
 package entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import enums.StatoMezzo;
+import enums.TipoMezzo;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "mezzo")
 public class Mezzo {
+    
     @Id
-    @Column(name = "id")
-    long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_mezzo")
+    private Long id;
 
-    @Column(name = "targa", nullable = false, length = 30)
-    private int tatga;
-    @Column(name = "tipoMezzo", nullable = false, length = 30)
-    private String tipoMezzo;
-    @Column(name = "capienza")
+    @Column(name = "targa", nullable = false, unique = true)
+    private String targa;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_mezzo", nullable = false)
+    private TipoMezzo tipoMezzo;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "stato_mezzo", nullable = false)
+    private StatoMezzo statoMezzo;
+
+    @Column(name = "capienza", nullable = false)
     private int capienza;
-    @Column(name = "statoMezzo", nullable = false, length = 30)
-    private String statoMezzo;
 
+    @OneToMany(mappedBy = "mezzo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Tratta> tratte;
 
     public Mezzo() {
     }
 
-    public Mezzo(int tatga, String tipoMezzo, int capienza, String statoMezzo) {
-        this.tatga = tatga;
+    public Mezzo(String targa, TipoMezzo tipoMezzo, StatoMezzo statoMezzo, int capienza) {
+        this.targa = targa;
         this.tipoMezzo = tipoMezzo;
-        this.capienza = capienza;
         this.statoMezzo = statoMezzo;
+        this.capienza = capienza;
     }
 
-
-    public int getTatga() {
-        return tatga;
+    public Long getId() {
+        return id;
     }
 
-    public void setTatga(int tatga) {
-        this.tatga = tatga;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getTipoMezzo() {
+    public String getTarga() {
+        return targa;
+    }
+
+    public void setTarga(String targa) {
+        this.targa = targa;
+    }
+
+    public TipoMezzo getTipoMezzo() {
         return tipoMezzo;
     }
 
-    public void setTipoMezzo(String tipoMezzo) {
+    public void setTipoMezzo(TipoMezzo tipoMezzo) {
         this.tipoMezzo = tipoMezzo;
+    }
+
+    public StatoMezzo getStatoMezzo() {
+        return statoMezzo;
+    }
+
+    public void setStatoMezzo(StatoMezzo statoMezzo) {
+        this.statoMezzo = statoMezzo;
     }
 
     public int getCapienza() {
@@ -57,21 +81,22 @@ public class Mezzo {
         this.capienza = capienza;
     }
 
-    public String getStatoMezzo() {
-        return statoMezzo;
+    public List<Tratta> getTratte() {
+        return tratte;
     }
 
-    public void setStatoMezzo(String statoMezzo) {
-        this.statoMezzo = statoMezzo;
+    public void setTratte(List<Tratta> tratte) {
+        this.tratte = tratte;
     }
 
     @Override
     public String toString() {
         return "Mezzo{" +
-                "tatga=" + tatga +
-                ", tipoMezzo='" + tipoMezzo + '\'' +
+                "id=" + id +
+                ", targa='" + targa + '\'' +
+                ", tipoMezzo=" + tipoMezzo +
+                ", statoMezzo=" + statoMezzo +
                 ", capienza=" + capienza +
-                ", statoMezzo='" + statoMezzo + '\'' +
                 '}';
     }
 }

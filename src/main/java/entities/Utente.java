@@ -1,48 +1,50 @@
 package entities;
 
-import enums.Ruolo;
+import enums.RuoloUtente;
 import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "Utente")
+@Table(name = "utente")
 public class Utente {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "id_utente")
+    private Long id;
 
-    @Column(name = "Nome", nullable = false, length = 10)
+    @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(name = "Cognome", nullable = false, length = 10)
+    @Column(name = "cognome", nullable = false)
     private String cognome;
 
-    @Column(name = "Username", nullable = false, length = 10)
-    private String username;
-
-    @Column(name = "Password", nullable = false, length = 12)
-    private int password;
+    @Column(name = "data_nascita", nullable = false)
+    private LocalDate dataNascita;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "Ruolo", nullable = false)
-    private Ruolo ruolo;
+    @Column(name = "ruolo", nullable = false)
+    private RuoloUtente ruolo;
 
-    @JoinColumn(name = "Titolo_viaggio_id")
-    private TitoloDiViaggio titoloViaggioId;
+    @OneToOne(mappedBy = "utente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Tessera tessera;
 
     public Utente() {
     }
 
-    public Utente(String nome, String cognome, String username, int password, Ruolo ruolo, TitoloDiViaggio titoloViaggioId) {
+    public Utente(String nome, String cognome, LocalDate dataNascita, RuoloUtente ruolo) {
         this.nome = nome;
         this.cognome = cognome;
-        this.username = username;
-        this.password = password;
+        this.dataNascita = dataNascita;
         this.ruolo = ruolo;
-        this.titoloViaggioId = titoloViaggioId;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -61,32 +63,28 @@ public class Utente {
         this.cognome = cognome;
     }
 
-    public String getUsername() {
-        return username;
+    public LocalDate getDataNascita() {
+        return dataNascita;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setDataNascita(LocalDate dataNascita) {
+        this.dataNascita = dataNascita;
     }
 
-    public int getPassword() {
-        return password;
-    }
-
-    public void setPassword(int password) {
-        this.password = password;
-    }
-
-    public Ruolo getRuolo() {
+    public RuoloUtente getRuolo() {
         return ruolo;
     }
 
-    public void setRuolo(Ruolo ruolo) {
+    public void setRuolo(RuoloUtente ruolo) {
         this.ruolo = ruolo;
     }
 
-    public TitoloDiViaggio getTitoloViaggioId() {
-        return titoloViaggioId;
+    public Tessera getTessera() {
+        return tessera;
+    }
+
+    public void setTessera(Tessera tessera) {
+        this.tessera = tessera;
     }
 
     @Override
@@ -95,10 +93,8 @@ public class Utente {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
-                ", username='" + username + '\'' +
-                ", password=" + password +
+                ", dataNascita=" + dataNascita +
                 ", ruolo=" + ruolo +
-                ", titoloViaggioId=" + titoloViaggioId +
                 '}';
     }
 }

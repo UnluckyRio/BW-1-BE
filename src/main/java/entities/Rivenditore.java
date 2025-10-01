@@ -4,69 +4,46 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "rivenditore")
+public class Rivenditore extends PuntoEmissione {
 
-public class Rivenditore {
-    @Id
-    @Column(name = "id_rivenditore")
-    private long id_rivenditore;
-    @Column(name = "nomeRivenditore", nullable = false, length = 30)
-    private String nomeRivenditore;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "nomeRivenditore")
-    private Rivenditore rivenditore;
-    @Column(name = "id_biglietto")
-    private long id_biglietto;
-    @Column(name = "id_abbonamento")
-    private long getId_biglietto;
+    @Column(name = "nome", nullable = false)
+    private String nome;
+
+    @Column(name = "indirizzo", nullable = false)
+    private String indirizzo;
 
     public Rivenditore() {
+        super();
     }
 
-    public Rivenditore(long id_rivenditore, String nomeRivenditore, Rivenditore rivenditore, long id_biglietto, long getId_biglietto) {
-        this.id_rivenditore = id_rivenditore;
-        this.nomeRivenditore = nomeRivenditore;
-        this.rivenditore = rivenditore;
-        this.id_biglietto = id_biglietto;
-        this.getId_biglietto = getId_biglietto;
+    public Rivenditore(String nome, String indirizzo) {
+        super();
+        this.nome = nome;
+        this.indirizzo = indirizzo;
     }
 
-    public long getId_rivenditore() {
-        return id_rivenditore;
+    public String getNome() {
+        return nome;
     }
 
-    public void setId_rivenditore(long id_rivenditore) {
-        this.id_rivenditore = id_rivenditore;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getNomeRivenditore() {
-        return nomeRivenditore;
+    public String getIndirizzo() {
+        return indirizzo;
     }
 
-    public void setNomeRivenditore(String nomeRivenditore) {
-        this.nomeRivenditore = nomeRivenditore;
+    public void setIndirizzo(String indirizzo) {
+        this.indirizzo = indirizzo;
     }
 
-    public Rivenditore getRivenditore() {
-        return rivenditore;
-    }
-
-    public void setRivenditore(Rivenditore rivenditore) {
-        this.rivenditore = rivenditore;
-    }
-
-    public long getId_biglietto() {
-        return id_biglietto;
-    }
-
-    public void setId_biglietto(long id_biglietto) {
-        this.id_biglietto = id_biglietto;
-    }
-
-    public long getGetId_biglietto() {
-        return getId_biglietto;
-    }
-
-    public void setGetId_biglietto(long getId_biglietto) {
-        this.getId_biglietto = getId_biglietto;
+    @Override
+    public String toString() {
+        return "Rivenditore{" +
+                "id=" + getId() +
+                ", nome='" + nome + '\'' +
+                ", indirizzo='" + indirizzo + '\'' +
+                '}';
     }
 }

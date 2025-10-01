@@ -6,7 +6,7 @@
         <!--   <class>entities.</class>
                <class>entities.</class>
                <class>entities.</class>
-               <class>entities.</class>
+
                <class>entities.</class>-->
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/bw1be"/>
