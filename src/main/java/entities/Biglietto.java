@@ -1,39 +1,72 @@
 package entities;
 
+
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "biglietto")
-public class Biglietto extends TitoloViaggio {
+@Table(name = "Biglietto")
 
-    @Column(name = "data_emissione", nullable = false)
+
+public class Biglietto {
+
+    @Column(name = "prezzo")
+    private double prezzo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name = "durata validazione", nullable = false)
+    private int durataValidazione;
+    @Column(name = "Data Emissione")
     private LocalDate dataEmissione;
 
-    @Column(name = "data_scadenza", nullable = false)
-    private LocalDate dataScadenza;
+    @OneToOne
+    @JoinColumn(name = "id_distributore", nullable = false)
+    private DistributoreAutomatico distributore;
 
-    @Column(name = "validato", nullable = false)
-    private boolean validato;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_distributore_automatico")
-    private DistributoreAutomatico distributoreAutomatico;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_rivenditore")
+    @OneToOne
+    @JoinColumn(name = "id_rivenditore", nullable = false)
     private Rivenditore rivenditore;
 
+
     public Biglietto() {
-        super();
+
     }
 
-    public Biglietto(LocalDate dataEmissione, LocalDate dataScadenza, DistributoreAutomatico distributoreAutomatico) {
-        super();
+
+    public Biglietto(double prezzo, int durataValidazione, LocalDate dataEmissione) {
+
+        this.id = id;
+        this.durataValidazione = durataValidazione;
+        this.prezzo = prezzo;
         this.dataEmissione = dataEmissione;
-        this.dataScadenza = dataScadenza;
-        this.distributoreAutomatico = distributoreAutomatico;
-        this.validato = false;
+
+
+    }
+
+    public double getPrezzo() {
+        return prezzo;
+    }
+
+    public void setPrezzo(double prezzo) {
+        this.prezzo = prezzo;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public int getDurataValidazione() {
+        return durataValidazione;
+    }
+
+    public void setDurataValidazione(int durataValidazione) {
+        this.durataValidazione = durataValidazione;
     }
 
     public LocalDate getDataEmissione() {
@@ -44,28 +77,12 @@ public class Biglietto extends TitoloViaggio {
         this.dataEmissione = dataEmissione;
     }
 
-    public LocalDate getDataScadenza() {
-        return dataScadenza;
+    public DistributoreAutomatico getDistributore() {
+        return distributore;
     }
 
-    public void setDataScadenza(LocalDate dataScadenza) {
-        this.dataScadenza = dataScadenza;
-    }
-
-    public boolean isValidato() {
-        return validato;
-    }
-
-    public void setValidato(boolean validato) {
-        this.validato = validato;
-    }
-
-    public DistributoreAutomatico getDistributoreAutomatico() {
-        return distributoreAutomatico;
-    }
-
-    public void setDistributoreAutomatico(DistributoreAutomatico distributoreAutomatico) {
-        this.distributoreAutomatico = distributoreAutomatico;
+    public void setDistributore(DistributoreAutomatico distributore) {
+        this.distributore = distributore;
     }
 
     public Rivenditore getRivenditore() {
@@ -79,10 +96,12 @@ public class Biglietto extends TitoloViaggio {
     @Override
     public String toString() {
         return "Biglietto{" +
-                "id=" + getId() +
+                "prezzo=" + prezzo +
+                ", id=" + id +
+                ", durataValidazione=" + durataValidazione +
                 ", dataEmissione=" + dataEmissione +
-                ", dataScadenza=" + dataScadenza +
-                ", validato=" + validato +
+                ", distributore=" + distributore +
+                ", rivenditore=" + rivenditore +
                 '}';
     }
 }

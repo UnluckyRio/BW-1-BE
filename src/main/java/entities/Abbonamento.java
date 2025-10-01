@@ -2,73 +2,72 @@ package entities;
 
 import enums.TipoAbbonamento;
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "abbonamento")
-public class Abbonamento extends TitoloViaggio {
+@Table(name = "Abbonamento")
 
-    @Column(name = "data_emissione", nullable = false)
-    private LocalDate dataEmissione;
 
-    @Column(name = "data_scadenza", nullable = false)
-    private LocalDate dataScadenza;
+public class Abbonamento {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected long id;
+
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_abbonamento", nullable = false)
+    @Column(name = "Tipo abbonamento", nullable = false)
     private TipoAbbonamento tipoAbbonamento;
 
-    @Column(name = "prezzo", nullable = false)
-    private Double prezzo;
+    @Column(name = "Data inizio iscrizione", nullable = false)
+    private LocalDate datainiziovalidita;
 
-    @Column(name = "attivo", nullable = false)
-    private boolean attivo;
+    @Column(name = "Data scadenza iscrizione", nullable = false)
+    private LocalDate datafinevalidita;
 
-    @Column(name = "zona_validita", nullable = false)
-    private String zonaValidita;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_tessera", nullable = false)
+    @Column(name = "Data Emissione")
+    private LocalDate dataEmissione;
+
+
+    @Column(name = "prezzo")
+    private double prezzo;
+
+    @ManyToOne
+    @JoinColumn(name = "Id_tessera")
     private Tessera tessera;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_distributore_automatico")
-    private DistributoreAutomatico distributoreAutomatico;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_rivenditore")
+    @OneToOne
+    @JoinColumn(name = "id_rivenditore", nullable = false)
     private Rivenditore rivenditore;
 
+    @OneToOne
+    @JoinColumn(name = "id_distributore", nullable = false)
+    private DistributoreAutomatico distributore;
+
+
     public Abbonamento() {
-        super();
+
     }
 
-    public Abbonamento(LocalDate dataEmissione, LocalDate dataScadenza, TipoAbbonamento tipoAbbonamento, 
-                      Double prezzo, String zonaValidita, Tessera tessera) {
-        super();
-        this.dataEmissione = dataEmissione;
-        this.dataScadenza = dataScadenza;
+    public Abbonamento(TipoAbbonamento tipoAbbonamento, LocalDate datainiziovalidita, LocalDate datafinevalidita, LocalDate dataEmissione, double prezzo) {
+
+        this.id = id;
         this.tipoAbbonamento = tipoAbbonamento;
-        this.prezzo = prezzo;
-        this.zonaValidita = zonaValidita;
-        this.tessera = tessera;
-        this.attivo = true;
-    }
-
-    public LocalDate getDataEmissione() {
-        return dataEmissione;
-    }
-
-    public void setDataEmissione(LocalDate dataEmissione) {
+        this.datainiziovalidita = datainiziovalidita;
+        this.datafinevalidita = datafinevalidita;
         this.dataEmissione = dataEmissione;
+        this.prezzo = prezzo;
+
     }
 
-    public LocalDate getDataScadenza() {
-        return dataScadenza;
+    public long getId() {
+        return id;
     }
 
-    public void setDataScadenza(LocalDate dataScadenza) {
-        this.dataScadenza = dataScadenza;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public TipoAbbonamento getTipoAbbonamento() {
@@ -79,28 +78,36 @@ public class Abbonamento extends TitoloViaggio {
         this.tipoAbbonamento = tipoAbbonamento;
     }
 
-    public Double getPrezzo() {
+    public LocalDate getDatainiziovalidita() {
+        return datainiziovalidita;
+    }
+
+    public void setDatainiziovalidita(LocalDate datainiziovalidita) {
+        this.datainiziovalidita = datainiziovalidita;
+    }
+
+    public LocalDate getDatafinevalidita() {
+        return datafinevalidita;
+    }
+
+    public void setDatafinevalidita(LocalDate datafinevalidita) {
+        this.datafinevalidita = datafinevalidita;
+    }
+
+    public LocalDate getDataEmissione() {
+        return dataEmissione;
+    }
+
+    public void setDataEmissione(LocalDate dataEmissione) {
+        this.dataEmissione = dataEmissione;
+    }
+
+    public double getPrezzo() {
         return prezzo;
     }
 
-    public void setPrezzo(Double prezzo) {
+    public void setPrezzo(double prezzo) {
         this.prezzo = prezzo;
-    }
-
-    public boolean isAttivo() {
-        return attivo;
-    }
-
-    public void setAttivo(boolean attivo) {
-        this.attivo = attivo;
-    }
-
-    public String getZonaValidita() {
-        return zonaValidita;
-    }
-
-    public void setZonaValidita(String zonaValidita) {
-        this.zonaValidita = zonaValidita;
     }
 
     public Tessera getTessera() {
@@ -111,14 +118,6 @@ public class Abbonamento extends TitoloViaggio {
         this.tessera = tessera;
     }
 
-    public DistributoreAutomatico getDistributoreAutomatico() {
-        return distributoreAutomatico;
-    }
-
-    public void setDistributoreAutomatico(DistributoreAutomatico distributoreAutomatico) {
-        this.distributoreAutomatico = distributoreAutomatico;
-    }
-
     public Rivenditore getRivenditore() {
         return rivenditore;
     }
@@ -127,17 +126,26 @@ public class Abbonamento extends TitoloViaggio {
         this.rivenditore = rivenditore;
     }
 
+    public DistributoreAutomatico getDistributore() {
+        return distributore;
+    }
+
+    public void setDistributore(DistributoreAutomatico distributore) {
+        this.distributore = distributore;
+    }
+
     @Override
     public String toString() {
         return "Abbonamento{" +
-                "id=" + getId() +
-                ", dataEmissione=" + dataEmissione +
-                ", dataScadenza=" + dataScadenza +
+                "id=" + id +
                 ", tipoAbbonamento=" + tipoAbbonamento +
+                ", datainiziovalidita=" + datainiziovalidita +
+                ", datafinevalidita=" + datafinevalidita +
+                ", dataEmissione=" + dataEmissione +
                 ", prezzo=" + prezzo +
-                ", attivo=" + attivo +
-                ", zonaValidita='" + zonaValidita + '\'' +
                 ", tessera=" + tessera +
+                ", rivenditore=" + rivenditore +
+                ", distributore=" + distributore +
                 '}';
     }
 }

@@ -1,6 +1,5 @@
 package dao;
 
-import entities.PuntoEmissione;
 import entities.DistributoreAutomatico;
 import entities.Rivenditore;
 import jakarta.persistence.EntityManager;
