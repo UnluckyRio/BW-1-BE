@@ -35,14 +35,14 @@ public class Biglietto {
 
     @ManyToOne
     @JoinColumn(name = "id_mezzo_validante", nullable = false)
-    private Mezzo mezzo;
+    private Mezzo mezzoValidante;
 
 
     public Biglietto() {
 
     }
 
-    public Biglietto( int durataBiglietto, double prezzo,  LocalDate dataEmissione,DistributoreAutomatico distributore, Rivenditore rivenditore, boolean validazione, LocalDate dataValidazione, Mezzo mezzo ) {
+    public Biglietto( int durataBiglietto, double prezzo,  LocalDate dataEmissione,DistributoreAutomatico distributore, Rivenditore rivenditore, boolean validazione, LocalDate dataValidazione, Mezzo mezzoValidante ) {
         this.prezzo = prezzo;
         this.durataBiglietto = durataBiglietto;
         this.dataEmissione = dataEmissione;
@@ -50,61 +50,13 @@ public class Biglietto {
         this.rivenditore = rivenditore;
         this.validazione = validazione;
         this.dataValidazione = dataValidazione;
-        this.mezzo = mezzo;
+        this.mezzoValidante = mezzoValidante;
 
 
     }
 
     public long getId() {
         return id;
-    }
-
-    public Mezzo getMezzoId() {
-        return mezzo;
-    }
-
-    public void setMezzoId(Mezzo mezzo) {
-        this.mezzo = mezzo;
-    }
-
-    public LocalDate getDataValidazione() {
-        return dataValidazione;
-    }
-
-    public void setDataValidazione(LocalDate dataValidazione) {
-        this.dataValidazione = dataValidazione;
-    }
-
-    public boolean isValidazione() {
-        return validazione;
-    }
-
-    public void setValidazione(boolean validazione) {
-        this.validazione = validazione;
-    }
-
-    public Rivenditore getRivenditore() {
-        return rivenditore;
-    }
-
-    public void setRivenditore(Rivenditore rivenditore) {
-        this.rivenditore = rivenditore;
-    }
-
-    public LocalDate getDataEmissione() {
-        return dataEmissione;
-    }
-
-    public void setDataEmissione(LocalDate dataEmissione) {
-        this.dataEmissione = dataEmissione;
-    }
-
-    public double getPrezzo() {
-        return prezzo;
-    }
-
-    public void setPrezzo(double prezzo) {
-        this.prezzo = prezzo;
     }
 
     public int getDurataBiglietto() {
@@ -115,12 +67,60 @@ public class Biglietto {
         this.durataBiglietto = durataBiglietto;
     }
 
+    public double getPrezzo() {
+        return prezzo;
+    }
+
+    public void setPrezzo(double prezzo) {
+        this.prezzo = prezzo;
+    }
+
+    public LocalDate getDataEmissione() {
+        return dataEmissione;
+    }
+
+    public void setDataEmissione(LocalDate dataEmissione) {
+        this.dataEmissione = dataEmissione;
+    }
+
     public DistributoreAutomatico getDistributore() {
         return distributore;
     }
 
     public void setDistributore(DistributoreAutomatico distributore) {
         this.distributore = distributore;
+    }
+
+    public Rivenditore getRivenditore() {
+        return rivenditore;
+    }
+
+    public void setRivenditore(Rivenditore rivenditore) {
+        this.rivenditore = rivenditore;
+    }
+
+    public boolean isValidazione() {
+        return validazione;
+    }
+
+    public void setValidazione(boolean validazione) {
+        this.validazione = validazione;
+    }
+
+    public LocalDate getDataValidazione() {
+        return dataValidazione;
+    }
+
+    public void setDataValidazione(LocalDate dataValidazione) {
+        this.dataValidazione = dataValidazione;
+    }
+
+    public Mezzo getMezzoValidante() {
+        return mezzoValidante;
+    }
+
+    public void setMezzoValidante(Mezzo mezzoValidante) {
+        this.mezzoValidante = mezzoValidante;
     }
 
     @Override
@@ -134,7 +134,7 @@ public class Biglietto {
                 ", rivenditore=" + rivenditore +
                 ", validazione=" + validazione +
                 ", dataValidazione=" + dataValidazione +
-                ", mezzo=" + mezzo +
+                ", mezzoValidante=" + mezzoValidante +
                 '}';
     }
 }
