@@ -6,10 +6,6 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "abbonamento")
-public class Abbonamento extends TitoloViaggio {
-
-    @Column(name = "data_emissione", nullable = false)
-    private LocalDate dataEmissione;
 
 public class Abbonamento {
 
