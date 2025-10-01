@@ -73,11 +73,11 @@ public class Application {
 
         // Creazione dei mezzi
         System.out.println("=== CREAZIONE MEZZI ===");
-        Mezzo mezzo1 = new Mezzo(1L, "AB123CD", 50, TipoMezzo.AUTOBUS, StatoMezzo.IN_SERVIZIO);
-        Mezzo mezzo2 = new Mezzo(2L, "EF456GH", 80, TipoMezzo.TRAM, StatoMezzo.IN_SERVIZIO);
-        Mezzo mezzo3 = new Mezzo(3L, "IJ789KL", 45, TipoMezzo.AUTOBUS, StatoMezzo.IN_MANUTENZIONE);
-        Mezzo mezzo4 = new Mezzo(4L, "MN012OP", 75, TipoMezzo.TRAM, StatoMezzo.IN_SERVIZIO);
-        Mezzo mezzo5 = new Mezzo(5L, "QR345ST", 55, TipoMezzo.AUTOBUS, StatoMezzo.IN_SERVIZIO);
+        Mezzo mezzo1 = new Mezzo("AB123CD", TipoMezzo.AUTOBUS, 50, StatoMezzo.IN_SERVIZIO);
+        Mezzo mezzo2 = new Mezzo("EF456GH", TipoMezzo.TRAM, 80, StatoMezzo.IN_SERVIZIO);
+        Mezzo mezzo3 = new Mezzo("IJ789KL", TipoMezzo.AUTOBUS, 45, StatoMezzo.IN_MANUTENZIONE);
+        Mezzo mezzo4 = new Mezzo("MN012OP", TipoMezzo.TRAM, 75, StatoMezzo.IN_SERVIZIO);
+        Mezzo mezzo5 = new Mezzo("QR345ST", TipoMezzo.AUTOBUS, 55, StatoMezzo.IN_SERVIZIO);
 
         mezzoDAO.save(mezzo1);
         mezzoDAO.save(mezzo2);
