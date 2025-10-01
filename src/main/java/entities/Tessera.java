@@ -6,45 +6,41 @@ import java.time.LocalDate;
 
 
 @Entity
-@Table(name = "Tessera")
+@Table(name = "tessera")
 public class Tessera {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "Data Emissione", nullable = false)
+
+    @Column(name = "data_emissione", nullable = false)
     private LocalDate dataEmissione;
-    @Column(name = "Data Scadenza", nullable = false)
+
+    @Column(name = "data_scadenza", nullable = false)
     private LocalDate dataScadenza;
+
     @OneToOne
-    @JoinColumn(name = "Utente_Id")
-    private Utente idUtente;
+    @JoinColumn(name = "id_utente")
+    private Utente utente;
 
-    public Tessera() {
-    }
+    public Tessera() {}
 
-    public Tessera(LocalDate dataEmissione, LocalDate dataScadenza) {
+    public Tessera(LocalDate dataEmissione, LocalDate dataScadenza, Utente utente) {
         this.dataEmissione = dataEmissione;
         this.dataScadenza = dataScadenza;
+        this.utente = utente;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public Utente getIdUtente() {
-        return idUtente;
+    public Utente getUtente() {
+        return utente;
     }
 
-    public void setIdUtente(Utente idUtente) {
-        this.idUtente = idUtente;
-    }
-
-    public LocalDate getDataScadenza() {
-        return dataScadenza;
-    }
-
-    public void setDataScadenza(LocalDate dataScadenza) {
-        this.dataScadenza = dataScadenza;
+    public void setUtente(Utente utente) {
+        this.utente = utente;
     }
 
     public LocalDate getDataEmissione() {
@@ -55,13 +51,21 @@ public class Tessera {
         this.dataEmissione = dataEmissione;
     }
 
+    public LocalDate getDataScadenza() {
+        return dataScadenza;
+    }
+
+    public void setDataScadenza(LocalDate dataScadenza) {
+        this.dataScadenza = dataScadenza;
+    }
+
     @Override
     public String toString() {
         return "Tessera{" +
                 "id=" + id +
                 ", dataEmissione=" + dataEmissione +
                 ", dataScadenza=" + dataScadenza +
-                ", idUtente=" + idUtente +
+                ", utente=" + utente +
                 '}';
     }
 }
