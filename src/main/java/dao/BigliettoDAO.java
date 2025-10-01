@@ -54,6 +54,30 @@ public class BigliettoDAO {
     }
 
 
+    public void deletewithId(long bigliettoid){
+
+        try {
+
+
+            Biglietto found = this.findById(bigliettoid);
+
+            EntityTransaction transaction = entityManager.getTransaction();
+
+            transaction.begin();
+
+            entityManager.remove(found);
+
+            transaction.commit();
+
+            System.out.println(found + "Rimosso correttamente");
+        } catch (Exception e){
+            throw new RuntimeException(e);
+
+        }
+
+
+    }
+
 
 
 }

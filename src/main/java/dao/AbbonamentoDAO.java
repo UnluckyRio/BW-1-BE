@@ -52,6 +52,29 @@ public class AbbonamentoDAO {
         }
     }
 
+    public void deletewithId(long abbonamentoid){
+
+        try {
+
+
+            Abbonamento found = this.findById(abbonamentoid);
+
+            EntityTransaction transaction = entityManager.getTransaction();
+
+            transaction.begin();
+
+            entityManager.remove(found);
+
+            transaction.commit();
+
+            System.out.println(found + "Rimosso correttamente");
+        } catch (Exception e){
+            throw new RuntimeException(e);
+
+        }
+
+
+    }
 
 
 
