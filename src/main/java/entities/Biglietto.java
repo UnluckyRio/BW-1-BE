@@ -10,11 +10,24 @@ public class Biglietto extends TitoloViaggio {
     @Column(name = "data_emissione", nullable = false)
     private LocalDate dataEmissione;
 
-    @Column(name = "data_scadenza", nullable = false)
-    private LocalDate dataScadenza;
+public class Biglietto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name = "Durata biglietto", nullable = false)
+    private int durataBiglietto;
+    @Column(name = "prezzo")
+    private double prezzo;
+    @Column(name = "Data Emissione")
+    private LocalDate dataEmissione;
 
-    @Column(name = "validato", nullable = false)
-    private boolean validato;
+    @OneToOne
+    @JoinColumn(name = "id_distributore", nullable = false)
+    private DistributoreAutomatico distributore;
+
+    @OneToOne
+    @JoinColumn(name = "id_rivenditore", nullable = false)
+    private Rivenditore rivenditore;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_distributore_automatico")
@@ -28,20 +41,15 @@ public class Biglietto extends TitoloViaggio {
         super();
     }
 
-    public Biglietto(LocalDate dataEmissione, LocalDate dataScadenza, DistributoreAutomatico distributoreAutomatico) {
-        super();
-        this.dataEmissione = dataEmissione;
-        this.dataScadenza = dataScadenza;
-        this.distributoreAutomatico = distributoreAutomatico;
-        this.validato = false;
-    }
 
-    public LocalDate getDataEmissione() {
-        return dataEmissione;
-    }
+    public Biglietto(double prezzo, int durataBiglietto, LocalDate dataEmissione) {
 
-    public void setDataEmissione(LocalDate dataEmissione) {
+        this.id = id;
+        this.durataBiglietto = durataBiglietto;
+        this.prezzo = prezzo;
         this.dataEmissione = dataEmissione;
+
+
     }
 
     public LocalDate getDataScadenza() {
@@ -60,12 +68,28 @@ public class Biglietto extends TitoloViaggio {
         this.validato = validato;
     }
 
-    public DistributoreAutomatico getDistributoreAutomatico() {
-        return distributoreAutomatico;
+    public int getDurataBiglietto() {
+        return durataBiglietto;
     }
 
-    public void setDistributoreAutomatico(DistributoreAutomatico distributoreAutomatico) {
-        this.distributoreAutomatico = distributoreAutomatico;
+    public void setDurataBiglietto(int durataBiglietto) {
+        this.durataBiglietto = durataBiglietto;
+    }
+
+    public LocalDate getDataEmissione() {
+        return dataEmissione;
+    }
+
+    public void setDataEmissione(LocalDate dataEmissione) {
+        this.dataEmissione = dataEmissione;
+    }
+
+    public DistributoreAutomatico getDistributore() {
+        return distributore;
+    }
+
+    public void setDistributore(DistributoreAutomatico distributore) {
+        this.distributore = distributore;
     }
 
     public Rivenditore getRivenditore() {
@@ -79,10 +103,12 @@ public class Biglietto extends TitoloViaggio {
     @Override
     public String toString() {
         return "Biglietto{" +
-                "id=" + getId() +
+                "id=" + id +
+                ", durataBiglietto=" + durataBiglietto +
+                ", prezzo=" + prezzo +
                 ", dataEmissione=" + dataEmissione +
-                ", dataScadenza=" + dataScadenza +
-                ", validato=" + validato +
+                ", distributore=" + distributore +
+                ", rivenditore=" + rivenditore +
                 '}';
     }
 }
