@@ -23,18 +23,14 @@ public class Utente {
     @Column(name = "Ruolo", nullable = false)
     private RuoloUtente ruoloUtente;
 
-    @JoinColumn(name = "Tessera_id")
-    private Tessera tesseraId;
-
     public Utente() {
     }
 
-    public Utente(String nome, String cognome, String username, RuoloUtente ruoloUtente, Tessera tesseraId) {
+    public Utente(String nome, String cognome, String username, RuoloUtente ruoloUtente) {
         this.nome = nome;
         this.cognome = cognome;
         this.username = username;
         this.ruoloUtente = ruoloUtente;
-        this.tesseraId = tesseraId;
     }
 
     public long getId() {
@@ -73,14 +69,6 @@ public class Utente {
         this.ruoloUtente = ruoloUtente;
     }
 
-    public Tessera getTessera() {
-        return tesseraId;
-    }
-
-    public void setTessera(Tessera tessera) {
-        this.tesseraId = tessera;
-    }
-
     @Override
     public String toString() {
         return "Utente{" +
@@ -88,8 +76,7 @@ public class Utente {
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
                 ", username='" + username + '\'' +
-                ", ruolo=" + ruoloUtente +
-                ", tessera=" + tesseraId +
+                ", ruoloUtente=" + ruoloUtente +
                 '}';
     }
 }

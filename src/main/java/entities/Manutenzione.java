@@ -1,48 +1,50 @@
 package entities;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "manutenzione")
-
 public class Manutenzione {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_manutenzione")
+    private Long idManutenzione;
+
     @ManyToOne
-    @JoinColumn(name = "manutenzione_id")
-    private long idManutenzione;
-    @OneToMany(mappedBy = "idMezzo")
-    private long idMezzo;
+    @JoinColumn(name = "id_mezzo")
+    private Mezzo mezzo;
+
+    @Column(name = "dataInizio")
     private LocalDate dataInizio;
+
+    @Column(name = "dataFine")
     private LocalDate dataFine;
 
+    public Manutenzione() {}
 
-    public Manutenzione() {
-    }
-
-    public Manutenzione(long idManutenzione, long idMezzo, LocalDate dataInizio, LocalDate dataFine) {
+    public Manutenzione(Long idManutenzione, Mezzo mezzo, LocalDate dataInizio, LocalDate dataFine) {
         this.idManutenzione = idManutenzione;
-        this.idMezzo = idMezzo;
+        this.mezzo = mezzo;
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
     }
 
-
-    public long getIdManutenzione() {
+    public Long getIdManutenzione() {
         return idManutenzione;
     }
 
-    public void setIdManutenzione(long idManutenzione) {
+    public void setIdManutenzione(Long idManutenzione) {
         this.idManutenzione = idManutenzione;
     }
 
-    public long getIdMezzo() {
-        return idMezzo;
+    public Mezzo getMezzo() {
+        return mezzo;
     }
 
-    public void setIdMezzo(long idMezzo) {
-        this.idMezzo = idMezzo;
+    public void setMezzo(Mezzo mezzo) {
+        this.mezzo = mezzo;
     }
 
     public LocalDate getDataInizio() {
@@ -61,12 +63,11 @@ public class Manutenzione {
         this.dataFine = dataFine;
     }
 
-
     @Override
     public String toString() {
         return "Manutenzione{" +
                 "idManutenzione=" + idManutenzione +
-                ", idMezzo=" + idMezzo +
+                ", mezzo=" + mezzo +
                 ", dataInizio=" + dataInizio +
                 ", dataFine=" + dataFine +
                 '}';

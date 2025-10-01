@@ -15,7 +15,6 @@ public class Abbonamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
 
-
     @Enumerated(EnumType.STRING)
     @Column(name = "Tipo abbonamento", nullable = false)
     private TipoAbbonamento tipoAbbonamento;
@@ -34,40 +33,37 @@ public class Abbonamento {
     @Column(name = "prezzo")
     private double prezzo;
 
-    @ManyToOne
-    @JoinColumn(name = "Id_tessera")
-    private Tessera tessera;
 
-    @OneToOne
-    @JoinColumn(name = "id_rivenditore", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "id_rivenditore")
     private Rivenditore rivenditore;
 
-    @OneToOne
-    @JoinColumn(name = "id_distributore", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "id_distributore_Automatico")
     private DistributoreAutomatico distributore;
 
+    @ManyToOne
+    @JoinColumn(name = "id_tessera")
+    private Tessera tessera;
 
     public Abbonamento() {
 
     }
 
-    public Abbonamento(TipoAbbonamento tipoAbbonamento, LocalDate datainiziovalidita, LocalDate datafinevalidita, LocalDate dataEmissione, double prezzo) {
-
-        this.id = id;
+    public Abbonamento(TipoAbbonamento tipoAbbonamento, LocalDate datainiziovalidita, LocalDate datafinevalidita, LocalDate dataEmissione, double prezzo, Rivenditore rivenditore, DistributoreAutomatico distributore,Tessera tessera) {
         this.tipoAbbonamento = tipoAbbonamento;
         this.datainiziovalidita = datainiziovalidita;
         this.datafinevalidita = datafinevalidita;
         this.dataEmissione = dataEmissione;
         this.prezzo = prezzo;
+        this.rivenditore = rivenditore;
+        this.distributore = distributore;
+        this.tessera = tessera;
 
     }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public TipoAbbonamento getTipoAbbonamento() {
@@ -110,14 +106,6 @@ public class Abbonamento {
         this.prezzo = prezzo;
     }
 
-    public Tessera getTessera() {
-        return tessera;
-    }
-
-    public void setTessera(Tessera tessera) {
-        this.tessera = tessera;
-    }
-
     public Rivenditore getRivenditore() {
         return rivenditore;
     }
@@ -134,6 +122,14 @@ public class Abbonamento {
         this.distributore = distributore;
     }
 
+    public Tessera getTessera() {
+        return tessera;
+    }
+
+    public void setTessera(Tessera tessera) {
+        this.tessera = tessera;
+    }
+
     @Override
     public String toString() {
         return "Abbonamento{" +
@@ -143,9 +139,9 @@ public class Abbonamento {
                 ", datafinevalidita=" + datafinevalidita +
                 ", dataEmissione=" + dataEmissione +
                 ", prezzo=" + prezzo +
-                ", tessera=" + tessera +
                 ", rivenditore=" + rivenditore +
                 ", distributore=" + distributore +
+                ", tessera=" + tessera +
                 '}';
     }
 }

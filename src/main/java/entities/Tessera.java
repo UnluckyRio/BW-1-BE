@@ -15,6 +15,7 @@ public class Tessera {
     private LocalDate dataEmissione;
     @Column(name = "Data Scadenza", nullable = false)
     private LocalDate dataScadenza;
+    @OneToOne
     @JoinColumn(name = "Utente_Id")
     private Utente idUtente;
 

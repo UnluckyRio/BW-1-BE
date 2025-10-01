@@ -13,35 +13,58 @@ public class Biglietto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "durata validazione", nullable = false)
-    private int durataValidazione;
+    @Column(name = "durata biglietto", nullable = false)
+    private int durataBiglietto;
     @Column(name = "prezzo")
     private double prezzo;
     @Column(name = "Data Emissione")
     private LocalDate dataEmissione;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_distributore", nullable = false)
     private DistributoreAutomatico distributore;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_rivenditore", nullable = false)
     private Rivenditore rivenditore;
+
+    @Column(name= "Validazione", nullable = false)
+    private boolean validazione;
+    @Column(name= "Data validazione", nullable = false)
+    private LocalDate dataValidazione;
+
+    @ManyToOne
+    @JoinColumn(name = "id_mezzo_validante", nullable = false)
+    private Mezzo mezzoValidante;
 
 
     public Biglietto() {
 
     }
 
-
-    public Biglietto(double prezzo, int durataValidazione, LocalDate dataEmissione) {
-
-        this.id = id;
-        this.durataValidazione = durataValidazione;
+    public Biglietto( int durataBiglietto, double prezzo,  LocalDate dataEmissione,DistributoreAutomatico distributore, Rivenditore rivenditore, boolean validazione, LocalDate dataValidazione, Mezzo mezzoValidante ) {
         this.prezzo = prezzo;
+        this.durataBiglietto = durataBiglietto;
         this.dataEmissione = dataEmissione;
+        this.distributore = distributore;
+        this.rivenditore = rivenditore;
+        this.validazione = validazione;
+        this.dataValidazione = dataValidazione;
+        this.mezzoValidante = mezzoValidante;
 
 
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public int getDurataBiglietto() {
+        return durataBiglietto;
+    }
+
+    public void setDurataBiglietto(int durataBiglietto) {
+        this.durataBiglietto = durataBiglietto;
     }
 
     public double getPrezzo() {
@@ -50,22 +73,6 @@ public class Biglietto {
 
     public void setPrezzo(double prezzo) {
         this.prezzo = prezzo;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public int getDurataValidazione() {
-        return durataValidazione;
-    }
-
-    public void setDurataValidazione(int durataValidazione) {
-        this.durataValidazione = durataValidazione;
     }
 
     public LocalDate getDataEmissione() {
@@ -92,15 +99,42 @@ public class Biglietto {
         this.rivenditore = rivenditore;
     }
 
+    public boolean isValidazione() {
+        return validazione;
+    }
+
+    public void setValidazione(boolean validazione) {
+        this.validazione = validazione;
+    }
+
+    public LocalDate getDataValidazione() {
+        return dataValidazione;
+    }
+
+    public void setDataValidazione(LocalDate dataValidazione) {
+        this.dataValidazione = dataValidazione;
+    }
+
+    public Mezzo getMezzoValidante() {
+        return mezzoValidante;
+    }
+
+    public void setMezzoValidante(Mezzo mezzoValidante) {
+        this.mezzoValidante = mezzoValidante;
+    }
+
     @Override
     public String toString() {
         return "Biglietto{" +
-                "prezzo=" + prezzo +
-                ", id=" + id +
-                ", durataValidazione=" + durataValidazione +
+                "id=" + id +
+                ", durataBiglietto=" + durataBiglietto +
+                ", prezzo=" + prezzo +
                 ", dataEmissione=" + dataEmissione +
                 ", distributore=" + distributore +
                 ", rivenditore=" + rivenditore +
+                ", validazione=" + validazione +
+                ", dataValidazione=" + dataValidazione +
+                ", mezzoValidante=" + mezzoValidante +
                 '}';
     }
 }
