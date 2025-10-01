@@ -10,22 +10,23 @@ import java.time.LocalDate;
 
 
 public class Biglietto {
-
-    @Column(name = "Data Emissione")
-    protected LocalDate dataEmissione;
-    @Column(name = "prezzo")
-    protected double prezzo;
-    @Column(name = "id_rivenditore", nullable = false)
-    protected Rivenditore idrivenditore;
-    @Column(name = "id_distributore", nullable = false)
-    protected DistributoreAutomatico iddistributore;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "Timbrato", nullable = false)
-    private boolean timbrato;
-    @Column(name = "durata validazione", nullable = false)
-    private int durataValidazione;
+    @Column(name = "Durata biglietto", nullable = false)
+    private int durataBiglietto;
+    @Column(name = "prezzo")
+    private double prezzo;
+    @Column(name = "Data Emissione")
+    private LocalDate dataEmissione;
+
+    @OneToOne
+    @JoinColumn(name = "id_distributore", nullable = false)
+    private DistributoreAutomatico distributore;
+
+    @OneToOne
+    @JoinColumn(name = "id_rivenditore", nullable = false)
+    private Rivenditore rivenditore;
 
 
     public Biglietto() {
@@ -33,19 +34,14 @@ public class Biglietto {
     }
 
 
-    public Biglietto(LocalDate dataEmissione, double prezzo, boolean timbrato, int durataValidazione) {
+    public Biglietto(double prezzo, int durataBiglietto, LocalDate dataEmissione) {
 
         this.id = id;
-        this.timbrato = timbrato;
-        this.durataValidazione = durataValidazione;
-    }
-
-    public LocalDate getDataEmissione() {
-        return dataEmissione;
-    }
-
-    public void setDataEmissione(LocalDate dataEmissione) {
+        this.durataBiglietto = durataBiglietto;
+        this.prezzo = prezzo;
         this.dataEmissione = dataEmissione;
+
+
     }
 
     public double getPrezzo() {
@@ -64,49 +60,47 @@ public class Biglietto {
         this.id = id;
     }
 
-    public Rivenditore getIdrivenditore() {
-        return idrivenditore;
+    public int getDurataBiglietto() {
+        return durataBiglietto;
     }
 
-    public void setIdrivenditore(Rivenditore idrivenditore) {
-        this.idrivenditore = idrivenditore;
+    public void setDurataBiglietto(int durataBiglietto) {
+        this.durataBiglietto = durataBiglietto;
     }
 
-    public DistributoreAutomatico getIddistributore() {
-        return iddistributore;
+    public LocalDate getDataEmissione() {
+        return dataEmissione;
     }
 
-    public void setIddistributore(DistributoreAutomatico iddistributore) {
-        this.iddistributore = iddistributore;
+    public void setDataEmissione(LocalDate dataEmissione) {
+        this.dataEmissione = dataEmissione;
     }
 
-    public boolean isTimbrato() {
-        return timbrato;
+    public DistributoreAutomatico getDistributore() {
+        return distributore;
     }
 
-    public void setTimbrato(boolean timbrato) {
-        this.timbrato = timbrato;
+    public void setDistributore(DistributoreAutomatico distributore) {
+        this.distributore = distributore;
     }
 
-    public int getDurataValidazione() {
-        return durataValidazione;
+    public Rivenditore getRivenditore() {
+        return rivenditore;
     }
 
-    public void setDurataValidazione(int durataValidazione) {
-        this.durataValidazione = durataValidazione;
+    public void setRivenditore(Rivenditore rivenditore) {
+        this.rivenditore = rivenditore;
     }
-
 
     @Override
     public String toString() {
         return "Biglietto{" +
-                "dataEmissione=" + dataEmissione +
+                "id=" + id +
+                ", durataBiglietto=" + durataBiglietto +
                 ", prezzo=" + prezzo +
-                ", idrivenditore=" + idrivenditore +
-                ", iddistributore=" + iddistributore +
-                ", id=" + id +
-                ", timbrato=" + timbrato +
-                ", durataValidazione=" + durataValidazione +
+                ", dataEmissione=" + dataEmissione +
+                ", distributore=" + distributore +
+                ", rivenditore=" + rivenditore +
                 '}';
     }
 }

@@ -16,41 +16,49 @@ public class Abbonamento {
     protected long id;
 
 
-    @Column(name = "Data Emissione")
-    protected LocalDate dataEmissione;
-
-    @Column(name = "prezzo")
-    protected double prezzo;
-
-
-    @Column(name = "id_rivenditore", nullable = false)
-    protected Rivenditore idrivenditore;
-
-
-    @Column(name = "id_distributore", nullable = false)
-    protected DistributoreAutomatico iddistributore;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "Tipo abbonamento", nullable = false)
     private TipoAbbonamento tipoAbbonamento;
 
-    @Column(name = "Data inizio iscrizione", nullable = false)
+    @Column(name = "Data inizio validità", nullable = false)
     private LocalDate datainiziovalidita;
 
-    @Column(name = "Data scadenza iscrizione", nullable = false)
+    @Column(name = "Data scadenza validità", nullable = false)
     private LocalDate datafinevalidita;
+
+
+    @Column(name = "Data Emissione")
+    private LocalDate dataEmissione;
+
+
+    @Column(name = "prezzo")
+    private double prezzo;
+
+    @ManyToOne
+    @JoinColumn(name = "Id_tessera")
+    private Tessera tessera;
+
+    @OneToOne
+    @JoinColumn(name = "id_rivenditore", nullable = false)
+    private Rivenditore rivenditore;
+
+    @OneToOne
+    @JoinColumn(name = "id_distributore", nullable = false)
+    private DistributoreAutomatico distributore;
 
 
     public Abbonamento() {
 
     }
 
-    public Abbonamento(LocalDate dataEmissione, double prezzo, TipoAbbonamento tipoAbbonamento, LocalDate datainiziovalidita, LocalDate datafinevalidita) {
+    public Abbonamento(TipoAbbonamento tipoAbbonamento, LocalDate datainiziovalidita, LocalDate datafinevalidita, LocalDate dataEmissione, double prezzo) {
 
         this.id = id;
         this.tipoAbbonamento = tipoAbbonamento;
         this.datainiziovalidita = datainiziovalidita;
         this.datafinevalidita = datafinevalidita;
+        this.dataEmissione = dataEmissione;
+        this.prezzo = prezzo;
 
     }
 
@@ -60,6 +68,30 @@ public class Abbonamento {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public TipoAbbonamento getTipoAbbonamento() {
+        return tipoAbbonamento;
+    }
+
+    public void setTipoAbbonamento(TipoAbbonamento tipoAbbonamento) {
+        this.tipoAbbonamento = tipoAbbonamento;
+    }
+
+    public LocalDate getDatainiziovalidita() {
+        return datainiziovalidita;
+    }
+
+    public void setDatainiziovalidita(LocalDate datainiziovalidita) {
+        this.datainiziovalidita = datainiziovalidita;
+    }
+
+    public LocalDate getDatafinevalidita() {
+        return datafinevalidita;
+    }
+
+    public void setDatafinevalidita(LocalDate datafinevalidita) {
+        this.datafinevalidita = datafinevalidita;
     }
 
     public LocalDate getDataEmissione() {
@@ -78,42 +110,42 @@ public class Abbonamento {
         this.prezzo = prezzo;
     }
 
-    public TipoAbbonamento getTipoAbbonamento() {
-        return tipoAbbonamento;
+    public Tessera getTessera() {
+        return tessera;
     }
 
-    public void setTipoAbbonamento(TipoAbbonamento tipoAbbonamento) {
-        this.tipoAbbonamento = tipoAbbonamento;
+    public void setTessera(Tessera tessera) {
+        this.tessera = tessera;
     }
 
-    public LocalDate getDataiscrizione() {
-        return datainiziovalidita;
+    public Rivenditore getRivenditore() {
+        return rivenditore;
     }
 
-    public void setDataiscrizione(LocalDate dataiscrizione) {
-        this.datainiziovalidita = dataiscrizione;
+    public void setRivenditore(Rivenditore rivenditore) {
+        this.rivenditore = rivenditore;
     }
 
-    public LocalDate getDatafinevalidita() {
-        return datafinevalidita;
+    public DistributoreAutomatico getDistributore() {
+        return distributore;
     }
 
-    public void setDatafinevalidita(LocalDate datafinevalidita) {
-        this.datafinevalidita = datafinevalidita;
+    public void setDistributore(DistributoreAutomatico distributore) {
+        this.distributore = distributore;
     }
-
 
     @Override
     public String toString() {
         return "Abbonamento{" +
                 "id=" + id +
-                ", dataEmissione=" + dataEmissione +
-                ", prezzo=" + prezzo +
-                ", idrivenditore=" + idrivenditore +
-                ", iddistributore=" + iddistributore +
                 ", tipoAbbonamento=" + tipoAbbonamento +
                 ", datainiziovalidita=" + datainiziovalidita +
                 ", datafinevalidita=" + datafinevalidita +
+                ", dataEmissione=" + dataEmissione +
+                ", prezzo=" + prezzo +
+                ", tessera=" + tessera +
+                ", rivenditore=" + rivenditore +
+                ", distributore=" + distributore +
                 '}';
     }
 }
