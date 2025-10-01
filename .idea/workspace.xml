@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="821c2404-7c27-4ff6-8fff-af23f1672be9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/AbbonamentoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/AbbonamentoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/BigliettoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/BigliettoDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +22,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "UnluckyRio"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/UnluckyRio/BW-1-BE.git",
+    "accountId": "1221d4fa-ac8a-4b57-ae16-f90748cb54db"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
@@ -33,16 +43,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Application.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Amin3&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Application.executor": "Run",
+    "JUnit.Tutti in BW1-BE (1).executor": "Run",
+    "JUnit.Tutti in BW1-BE.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "branch-valerio",
+    "kotlin-language-version-configured": "true",
+    "show.migrate.to.gradle.popup": "false"
   }
-}</component>
-  <component name="RunManager" selected="JUnit.Tutti in BW1-BE">
+}]]></component>
+  <component name="RunManager" selected="JUnit.Tutti in BW1-BE (1)">
     <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
       <option name="appName" />
       <option name="appServicePlanName" />
@@ -79,6 +93,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Tutti in BW1-BE (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="BW1-BE" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Tutti in BW1-BE" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="BW1-BE" />
       <option name="PACKAGE_NAME" value="" />
@@ -89,6 +111,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.Tutti in BW1-BE (1)" />
         <item itemvalue="JUnit.Tutti in BW1-BE" />
         <item itemvalue="Applicazione.Application" />
       </list>
