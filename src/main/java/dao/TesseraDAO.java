@@ -1,8 +1,11 @@
 package dao;
 
+import entities.Abbonamento;
 import entities.Tessera;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class TesseraDAO {
@@ -62,5 +65,31 @@ public class TesseraDAO {
             throw e;
         }
     }
-}
 
+    public boolean verificaValiditaAbbonamento(long tesseraId) {
+        try {
+            Long count = em.createQuery(
+                            "SELECT COUNT(a) FROM Abbonamento a WHERE a.tessera.id = :tesseraId " +
+                                    "AND :oggi BETWEEN a.datainiziovalidita AND a.datafinevalidita", Long.class)
+                    .setParameter("tesseraId", tesseraId)
+                    .setParameter("oggi", LocalDate.now())
+                    .getSingleResult();
+            return count > 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public Abbonamento findAbbonamentoValidoByTessera(long tesseraId) {
+        try {
+            return em.createQuery(
+                            "SELECT a FROM Abbonamento a WHERE a.tessera.id = :tesseraId " +
+                                    "AND :oggi BETWEEN a.datainiziovalidita AND a.datafinevalidita", Abbonamento.class)
+                    .setParameter("tesseraId", tesseraId)
+                    .setParameter("oggi", LocalDate.now())
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+}

@@ -20,7 +20,10 @@ public class BigliettoDAO {
             transaction.begin();
             entityManager.persist(newBiglietto);
             transaction.commit();
-            System.out.println("Biglietto salvato correttamente" + newBiglietto);
+            System.out.println("Biglietto salvato correttamente - ID: " + newBiglietto.getId() +
+                    " - Emesso presso ID Punto Emissione: " + newBiglietto.getPuntoEmissione().getIdPuntoEmissione() +
+                    " (" + newBiglietto.getPuntoEmissione().getIndirizzo() + ")" +
+                    " - Prezzo: €" + newBiglietto.getPrezzo());
         } catch (Exception e) {
             if(transaction.isActive()){
                 transaction.rollback();
@@ -61,43 +64,19 @@ public class BigliettoDAO {
         }
     }
 
-    public void delete(Biglietto biglietto) {
-        EntityTransaction transaction = entityManager.getTransaction();
+    public void deleteWithId(long bigliettoid){
         try {
-            transaction.begin();
-            entityManager.remove(biglietto);
-            transaction.commit();
-            System.out.println("Biglietto eliminato con successo");
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            System.out.println("Errore durante l'eliminazione");
-        }
-    }
-    public void deletewithId(long bigliettoid){
-
-        try {
-
-
             Biglietto found = this.findById(bigliettoid);
-
             EntityTransaction transaction = entityManager.getTransaction();
-
             transaction.begin();
-
             entityManager.remove(found);
-
             transaction.commit();
-
-            System.out.println(found + "Rimosso correttamente");
+            System.out.println(found + " Rimosso correttamente");
         } catch (Exception e){
             throw new RuntimeException(e);
-
         }
-
-
     }
+
     public void update(Biglietto biglietto) {
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -112,20 +91,19 @@ public class BigliettoDAO {
             System.out.println("Errore durante l'aggiornamento");
         }
     }
-    EntityManager em;
-    public long countBigliettiByPuntoEmissioneAndPeriodo(Long puntoEmissioneId, LocalDate dataInizio, LocalDate dataFine) {
 
-        return em.createQuery(
-                        "SELECT COUNT(b) FROM Biglietto b WHERE " +
-                                "(b.distributore.idPuntoEmissione = :puntoId OR b.rivenditore.idPuntoEmissione = :puntoId) " +
+    public long countBigliettiByPuntoEmissioneAndPeriodo(Long puntoEmissioneId, LocalDate dataInizio, LocalDate dataFine) {
+        return entityManager.createQuery(
+                        "SELECT COUNT(b) FROM Biglietto b WHERE b.puntoEmissione.idPuntoEmissione = :puntoId " +
                                 "AND b.dataEmissione BETWEEN :dataInizio AND :dataFine", Long.class)
                 .setParameter("puntoId", puntoEmissioneId)
                 .setParameter("dataInizio", dataInizio)
                 .setParameter("dataFine", dataFine)
                 .getSingleResult();
     }
+
     public long countBigliettiByPeriodo(LocalDate dataInizio, LocalDate dataFine) {
-        return em.createQuery(
+        return entityManager.createQuery(
                         "SELECT COUNT(b) FROM Biglietto b WHERE b.dataEmissione BETWEEN :dataInizio AND :dataFine", Long.class)
                 .setParameter("dataInizio", dataInizio)
                 .setParameter("dataFine", dataFine)
@@ -133,9 +111,9 @@ public class BigliettoDAO {
     }
 
     public long countBigliettiVidimatiByMezzo(Long mezzoId, LocalDate dataInizio, LocalDate dataFine) {
-        return em.createQuery(
+        return entityManager.createQuery(
                         "SELECT COUNT(b) FROM Biglietto b WHERE b.mezzoValidante.id = :mezzoId " +
-                                "AND b.validazione = true AND b.dataValidazione BETWEEN :dataInizio AND :dataFine", Long.class)
+                                "AND b.dataValidazione IS NOT NULL AND b.dataValidazione BETWEEN :dataInizio AND :dataFine", Long.class)
                 .setParameter("mezzoId", mezzoId)
                 .setParameter("dataInizio", dataInizio)
                 .setParameter("dataFine", dataFine)
@@ -143,8 +121,8 @@ public class BigliettoDAO {
     }
 
     public long countBigliettiVidimatiByPeriodo(LocalDate dataInizio, LocalDate dataFine) {
-        return em.createQuery(
-                        "SELECT COUNT(b) FROM Biglietto b WHERE b.validazione = true " +
+        return entityManager.createQuery(
+                        "SELECT COUNT(b) FROM Biglietto b WHERE b.dataValidazione IS NOT NULL " +
                                 "AND b.dataValidazione BETWEEN :dataInizio AND :dataFine", Long.class)
                 .setParameter("dataInizio", dataInizio)
                 .setParameter("dataFine", dataFine)

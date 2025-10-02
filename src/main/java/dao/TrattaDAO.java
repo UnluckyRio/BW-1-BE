@@ -14,7 +14,7 @@ public class TrattaDAO {
         this.em = em;
     }
 
-    public void save (Tratta newTratta) {
+    public void save(Tratta newTratta) {
         try {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
@@ -35,7 +35,7 @@ public class TrattaDAO {
         }
     }
 
-    public Tratta findPathById (long id) {
+    public Tratta findPathById(long id) {
         return em.find(Tratta.class, id);
     }
 
@@ -47,14 +47,14 @@ public class TrattaDAO {
             transaction.commit();
             System.out.println("Tratta aggiornata");
         } catch (Exception ex) {
-            if(transaction.isActive()) transaction.rollback();
+            if (transaction.isActive()) transaction.rollback();
             System.out.println(ex.getMessage());
         }
     }
 
     public void delete(long id) {
         Tratta found = findPathById(id);
-        if(found != null) {
+        if (found != null) {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
             em.remove(found);
@@ -63,7 +63,16 @@ public class TrattaDAO {
         }
     }
 
-   /* public List<Tratta> findAll() {
+    public List<Tratta> findAll() {
         return em.createQuery("SELECT t FROM Tratta t", Tratta.class).getResultList();
-    }*/
+    }
+    public long countPercorrenzeByTratta(long trattaId, LocalDate dataInizio, LocalDate dataFine) {
+        return em.createQuery(
+                        "SELECT COUNT(pm) FROM PercorrenzaMedia pm WHERE pm.tratta.id = :trattaId " +
+                                "AND pm.dataPercorrenza BETWEEN :dataInizio AND :dataFine", Long.class)
+                .setParameter("trattaId", trattaId)
+                .setParameter("dataInizio", dataInizio)
+                .setParameter("dataFine", dataFine)
+                .getSingleResult();
+    }
 }

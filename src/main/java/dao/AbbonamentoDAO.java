@@ -19,7 +19,12 @@ public class AbbonamentoDAO {
             transaction.begin();
             entityManager.persist(newAbbonamento);
             transaction.commit();
-            System.out.println("Abbonamento salvato correttamente" + newAbbonamento);
+            System.out.println("Abbonamento salvato correttamente - ID: " + newAbbonamento.getId() +
+                    " - Tipo: " + newAbbonamento.getTipoAbbonamento() +
+                    " - Emesso presso ID Punto Emissione: " + newAbbonamento.getPuntoEmissione().getIdPuntoEmissione() +
+                    " (" + newAbbonamento.getPuntoEmissione().getIndirizzo() + ")" +
+                    " - Tessera ID: " + newAbbonamento.getTessera().getId() +
+                    " - Prezzo: €" + newAbbonamento.getPrezzo());
         } catch (Exception e) {
             if(transaction.isActive()){
                 transaction.rollback();
@@ -38,43 +43,19 @@ public class AbbonamentoDAO {
         }
     }
 
-    public void delete(Abbonamento abbonamento) {
-        EntityTransaction transaction = entityManager.getTransaction();
+    public void deleteWithId(long abbonamentoid){
         try {
-            transaction.begin();
-            entityManager.remove(abbonamento);
-            transaction.commit();
-            System.out.println("Abbonamento eliminato con successo");
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            System.out.println("Errore durante l'eliminazione");
-        }
-    }
-    public void deletewithId(long abbonamentoid){
-
-        try {
-
-
             Abbonamento found = this.findById(abbonamentoid);
-
             EntityTransaction transaction = entityManager.getTransaction();
-
             transaction.begin();
-
             entityManager.remove(found);
-
             transaction.commit();
-
-            System.out.println(found + "Rimosso correttamente");
+            System.out.println(found + " Rimosso correttamente");
         } catch (Exception e){
             throw new RuntimeException(e);
-
         }
-
-
     }
+
     public void update(Abbonamento abbonamento) {
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -89,11 +70,10 @@ public class AbbonamentoDAO {
             System.out.println("Errore durante l'aggiornamento");
         }
     }
-    EntityManager em;
+
     public long countAbbonamentiByPuntoEmissioneAndPeriodo(Long puntoEmissioneId, LocalDate dataInizio, LocalDate dataFine) {
-        return em.createQuery(
-                        "SELECT COUNT(a) FROM Abbonamento a WHERE " +
-                                "(a.distributore.idPuntoEmissione = :puntoId OR a.rivenditore.idPuntoEmissione = :puntoId) " +
+        return entityManager.createQuery(
+                        "SELECT COUNT(a) FROM Abbonamento a WHERE a.puntoEmissione.idPuntoEmissione = :puntoId " +
                                 "AND a.dataEmissione BETWEEN :dataInizio AND :dataFine", Long.class)
                 .setParameter("puntoId", puntoEmissioneId)
                 .setParameter("dataInizio", dataInizio)
@@ -102,11 +82,10 @@ public class AbbonamentoDAO {
     }
 
     public long countAbbonamentiByPeriodo(LocalDate dataInizio, LocalDate dataFine) {
-        return em.createQuery(
+        return entityManager.createQuery(
                         "SELECT COUNT(a) FROM Abbonamento a WHERE a.dataEmissione BETWEEN :dataInizio AND :dataFine", Long.class)
                 .setParameter("dataInizio", dataInizio)
                 .setParameter("dataFine", dataFine)
                 .getSingleResult();
     }
-
 }

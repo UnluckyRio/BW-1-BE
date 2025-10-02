@@ -3,7 +3,8 @@ package dao;
 import entities.PercorrenzaMedia;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-
+import java.time.LocalTime;
+import java.util.List;
 
 public class PercorrenzaMediaDAO {
 
@@ -13,7 +14,7 @@ public class PercorrenzaMediaDAO {
         this.em = em;
     }
 
-    public void save (PercorrenzaMedia newPercorrenzaMedia) {
+    public void save(PercorrenzaMedia newPercorrenzaMedia) {
         try {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
@@ -25,7 +26,7 @@ public class PercorrenzaMediaDAO {
         }
     }
 
-    public PercorrenzaMedia findAvaragePathById (long id) {
+    public PercorrenzaMedia findAvaragePathById(long id) {
         return em.find(PercorrenzaMedia.class, id);
     }
 
@@ -37,14 +38,14 @@ public class PercorrenzaMediaDAO {
             transaction.commit();
             System.out.println("Percorrenza media aggiornata");
         } catch (Exception ex) {
-            if(transaction.isActive()) transaction.rollback();
+            if (transaction.isActive()) transaction.rollback();
             System.out.println(ex.getMessage());
         }
     }
 
     public void delete(long id) {
         PercorrenzaMedia found = findAvaragePathById(id);
-        if(found != null) {
+        if (found != null) {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
             em.remove(found);
@@ -53,7 +54,27 @@ public class PercorrenzaMediaDAO {
         }
     }
 
-    /*public List<PercorrenzaMedia> findAll() {
+    public List<PercorrenzaMedia> findAll() {
         return em.createQuery("SELECT p FROM PercorrenzaMedia p", PercorrenzaMedia.class).getResultList();
-    }*/
+    }
+
+    public LocalTime calcolaTempoMedioEffettivo(long trattaId) {
+        List<PercorrenzaMedia> percorrenze = em.createQuery(
+                        "SELECT pm FROM PercorrenzaMedia pm WHERE pm.tratta.id = :trattaId",
+                        PercorrenzaMedia.class)
+                .setParameter("trattaId", trattaId)
+                .getResultList();
+
+        if (percorrenze.isEmpty()) {
+            return null;
+        }
+
+        long totalSeconds = 0;
+        for (PercorrenzaMedia pm : percorrenze) {
+            totalSeconds += pm.getTempoEffettivo().toSecondOfDay();
+        }
+        long averageSeconds = totalSeconds / percorrenze.size();
+
+        return LocalTime.ofSecondOfDay(averageSeconds);
+    }
 }

@@ -5,24 +5,67 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
 public class RivenditoreDAO {
+
     private final EntityManager em;
 
-    public RivenditoreDAO(EntityManager em){
-        this.em=em;
+    public RivenditoreDAO(EntityManager em) {
+        this.em = em;
     }
-    public void save(Rivenditore newrivenditore){
-        EntityTransaction transaction=em.getTransaction();
-        try{
+
+    public void save(Rivenditore newRivenditore) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
             transaction.begin();
-            em.persist(newrivenditore);
+            em.persist(newRivenditore);
             transaction.commit();
-            System.out.println("Rivenditore" + newrivenditore + "ha venduto il bilgietto");
-        }catch (Exception e){
-            if(transaction.isActive()){
+            System.out.println("Rivenditore salvato con successo - ID Punto Emissione: " +
+                    newRivenditore.getIdPuntoEmissione() + " - Nome: " + newRivenditore.getNomeRivenditore() +
+                    " - Indirizzo: " + newRivenditore.getIndirizzo());
+        } catch (Exception e) {
+            if (transaction.isActive()) {
                 transaction.rollback();
             }
-            System.out.println("Errore durante la vendita");
+            System.out.println("Errore durante il salvataggio del rivenditore");
             e.printStackTrace();
+        }
+    }
+
+    public Rivenditore findById(long id) {
+        return em.find(Rivenditore.class, id);
+    }
+
+    public void update(Rivenditore rivenditore) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            em.merge(rivenditore);
+            transaction.commit();
+            System.out.println("Rivenditore aggiornato con successo");
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            System.out.println("Errore durante l'aggiornamento");
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(long id) {
+        Rivenditore found = findById(id);
+        if (found != null) {
+            EntityTransaction transaction = em.getTransaction();
+            try {
+                transaction.begin();
+                em.remove(found);
+                transaction.commit();
+                System.out.println("Rivenditore eliminato con successo");
+            } catch (Exception e) {
+                if (transaction.isActive()) {
+                    transaction.rollback();
+                }
+                System.out.println("Errore durante l'eliminazione");
+                e.printStackTrace();
+            }
         }
     }
 }

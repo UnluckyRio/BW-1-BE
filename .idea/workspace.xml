@@ -6,16 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="821c2404-7c27-4ff6-8fff-af23f1672be9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/AbbonamentoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/AbbonamentoDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/BigliettoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/BigliettoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/DistributoreAutomaticoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/DistributoreAutomaticoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/ManutenzioneDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/ManutenzioneDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/MezzoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/MezzoDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/PercorrenzaMediaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/PercorrenzaMediaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/RivenditoreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/RivenditoreDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/TesseraDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/TesseraDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/TrattaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/TrattaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Abbonamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Abbonamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Biglietto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Biglietto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Mezzo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Mezzo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/PercorrenzaMedia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/PercorrenzaMedia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Tessera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Tessera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Tratta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Tratta.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +62,7 @@
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Application">
     <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
       <option name="appName" />
       <option name="appServicePlanName" />
@@ -95,6 +95,7 @@
     </configuration>
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Application" />
+      <module name="BW1-BE" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -125,10 +126,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Application" />
         <item itemvalue="JUnit.Tutti in BW1-BE (2)" />
         <item itemvalue="JUnit.Tutti in BW1-BE (1)" />
         <item itemvalue="JUnit.Tutti in BW1-BE" />
-        <item itemvalue="Applicazione.Application" />
       </list>
     </recent_temporary>
   </component>
