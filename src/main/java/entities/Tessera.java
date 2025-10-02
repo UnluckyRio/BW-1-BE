@@ -31,10 +31,6 @@ public class Tessera {
         this.utente = utente;
     }
 
-    public Tessera(String dataEmissioneStr, String dataScadenzaStr, Utente utente) {
-        this(LocalDate.parse(dataEmissioneStr), LocalDate.parse(dataScadenzaStr), utente);
-    }
-
 
     public Long getId() {
         return id;

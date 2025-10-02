@@ -2,13 +2,10 @@ package entities;
 
 import enums.TipoAbbonamento;
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "Abbonamento")
-
-
 public class Abbonamento {
 
     @Id
@@ -25,41 +22,31 @@ public class Abbonamento {
     @Column(name = "Data scadenza validità", nullable = false)
     private LocalDate datafinevalidita;
 
-
     @Column(name = "Data Emissione")
     private LocalDate dataEmissione;
-
 
     @Column(name = "prezzo")
     private double prezzo;
 
-
     @ManyToOne
-    @JoinColumn(name = "id_rivenditore")
-    private Rivenditore rivenditore;
-
-    @ManyToOne
-    @JoinColumn(name = "id_distributore_Automatico")
-    private DistributoreAutomatico distributore;
+    @JoinColumn(name = "id_punto_emissione")
+    private PuntoDiEmissione puntoEmissione;
 
     @ManyToOne
     @JoinColumn(name = "id_tessera")
     private Tessera tessera;
 
     public Abbonamento() {
-
     }
 
-    public Abbonamento(TipoAbbonamento tipoAbbonamento, LocalDate datainiziovalidita, LocalDate datafinevalidita, LocalDate dataEmissione, double prezzo, Rivenditore rivenditore, DistributoreAutomatico distributore,Tessera tessera) {
+    public Abbonamento(TipoAbbonamento tipoAbbonamento, LocalDate datainiziovalidita, LocalDate datafinevalidita, LocalDate dataEmissione, double prezzo, PuntoDiEmissione puntoEmissione, Tessera tessera) {
         this.tipoAbbonamento = tipoAbbonamento;
         this.datainiziovalidita = datainiziovalidita;
         this.datafinevalidita = datafinevalidita;
         this.dataEmissione = dataEmissione;
         this.prezzo = prezzo;
-        this.rivenditore = rivenditore;
-        this.distributore = distributore;
+        this.puntoEmissione = puntoEmissione;
         this.tessera = tessera;
-
     }
 
     public long getId() {
@@ -106,20 +93,12 @@ public class Abbonamento {
         this.prezzo = prezzo;
     }
 
-    public Rivenditore getRivenditore() {
-        return rivenditore;
+    public PuntoDiEmissione getPuntoEmissione() {
+        return puntoEmissione;
     }
 
-    public void setRivenditore(Rivenditore rivenditore) {
-        this.rivenditore = rivenditore;
-    }
-
-    public DistributoreAutomatico getDistributore() {
-        return distributore;
-    }
-
-    public void setDistributore(DistributoreAutomatico distributore) {
-        this.distributore = distributore;
+    public void setPuntoEmissione(PuntoDiEmissione puntoEmissione) {
+        this.puntoEmissione = puntoEmissione;
     }
 
     public Tessera getTessera() {
@@ -139,8 +118,7 @@ public class Abbonamento {
                 ", datafinevalidita=" + datafinevalidita +
                 ", dataEmissione=" + dataEmissione +
                 ", prezzo=" + prezzo +
-                ", rivenditore=" + rivenditore +
-                ", distributore=" + distributore +
+                ", puntoEmissione=" + puntoEmissione +
                 ", tessera=" + tessera +
                 '}';
     }
