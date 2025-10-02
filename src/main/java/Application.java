@@ -13,7 +13,7 @@ public class Application {
 
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
-
+/*
         // Inizializzazione dei DAO
         UtenteDAO utenteDAO = new UtenteDAO(em);
         TesseraDAO tesseraDAO = new TesseraDAO(em);
@@ -156,8 +156,7 @@ public class Application {
 
         // Creazione degli abbonamenti
         System.out.println("=== CREAZIONE ABBONAMENTI ===");
-
-        // Abbonamento 1 - Settimanale, acquistato da rivenditore
+        /*     // Abbonamento 1 - Settimanale, acquistato da rivenditore
         Abbonamento abbonamento1 = new Abbonamento(
             TipoAbbonamento.SETTIMANALE,
             LocalDate.now(), // data inizio validità
@@ -217,6 +216,8 @@ public class Application {
             tessera5
         );
 
+
+
         abbonamentoDAO.save(abbonamento1);
         abbonamentoDAO.save(abbonamento2);
         abbonamentoDAO.save(abbonamento3);
@@ -232,7 +233,7 @@ public class Application {
         System.out.println("- 5 Mezzi");
         System.out.println("- 5 Biglietti");
         System.out.println("- 5 Abbonamenti");
-
+*/
         em.close();
         emf.close();
     }

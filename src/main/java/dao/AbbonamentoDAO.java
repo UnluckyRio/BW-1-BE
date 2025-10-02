@@ -101,6 +101,10 @@ public class AbbonamentoDAO {
                 .getSingleResult();
     }
 
+
+
+    
+
     public long countAbbonamentiByPeriodo(LocalDate dataInizio, LocalDate dataFine) {
         return em.createQuery(
                         "SELECT COUNT(a) FROM Abbonamento a WHERE a.dataEmissione BETWEEN :dataInizio AND :dataFine", Long.class)
