@@ -1,7 +1,7 @@
 package entities;
 
 import jakarta.persistence.*;
-
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "tempoMedioPercorrenza")
@@ -17,11 +17,11 @@ public class PercorrenzaMedia {
     private Tratta tratta;
 
     @Column(name = "tempoEffettivo")
-    private double tempoEffettivo;
+    private LocalTime tempoEffettivo;
 
     public PercorrenzaMedia() {}
 
-    public PercorrenzaMedia(Tratta tratta, double tempoEffettivo) {
+    public PercorrenzaMedia(Tratta tratta, LocalTime tempoEffettivo) {
         this.tratta = tratta;
         this.tempoEffettivo = tempoEffettivo;
     }
@@ -38,11 +38,11 @@ public class PercorrenzaMedia {
         this.tratta = tratta;
     }
 
-    public double getTempoEffettivo() {
+    public LocalTime getTempoEffettivo() {
         return tempoEffettivo;
     }
 
-    public void setTempoEffettivo(double tempoEffettivo) {
+    public void setTempoEffettivo(LocalTime tempoEffettivo) {
         this.tempoEffettivo = tempoEffettivo;
     }
 
@@ -55,4 +55,3 @@ public class PercorrenzaMedia {
                 '}';
     }
 }
-

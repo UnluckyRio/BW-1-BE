@@ -1,7 +1,6 @@
 package entities;
 
 import jakarta.persistence.*;
-
 import java.time.LocalTime;
 
 @Entity
@@ -25,17 +24,13 @@ public class Tratta {
     @Column(name = "arrivo", nullable = false)
     private String arrivo;
 
-    @Column(name = "tempoEffettivo")
-    private LocalTime tempoEffettivo;
-
     public Tratta() {}
 
-    public Tratta(Mezzo mezzo, LocalTime tempoPrevisto, String partenza, String arrivo, LocalTime tempoEffettivo) {
+    public Tratta(Mezzo mezzo, LocalTime tempoPrevisto, String partenza, String arrivo) {
         this.mezzo = mezzo;
         this.tempoPrevisto = tempoPrevisto;
         this.partenza = partenza;
         this.arrivo = arrivo;
-        this.tempoEffettivo = tempoEffettivo;
     }
 
     public Long getId() {
@@ -78,14 +73,6 @@ public class Tratta {
         this.arrivo = arrivo;
     }
 
-    public LocalTime getTempoEffettivo() {
-        return tempoEffettivo;
-    }
-
-    public void setTempoEffettivo(LocalTime tempoEffettivo) {
-        this.tempoEffettivo = tempoEffettivo;
-    }
-
     @Override
     public String toString() {
         return "Tratta{" +
@@ -94,7 +81,6 @@ public class Tratta {
                 ", tempoPrevisto=" + tempoPrevisto +
                 ", partenza='" + partenza + '\'' +
                 ", arrivo='" + arrivo + '\'' +
-                ", tempoEffettivo=" + tempoEffettivo +
                 '}';
     }
 }

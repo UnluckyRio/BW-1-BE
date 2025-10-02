@@ -31,6 +31,7 @@ public class Tessera {
         this.utente = utente;
     }
 
+
     public Long getId() {
         return id;
     }

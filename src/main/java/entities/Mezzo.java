@@ -11,6 +11,7 @@ import java.util.List;
 public class Mezzo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id mezzo")
     private long id;
 

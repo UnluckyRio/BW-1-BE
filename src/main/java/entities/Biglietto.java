@@ -1,58 +1,46 @@
 package entities;
 
-
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "Biglietto")
-
-
 public class Biglietto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(name = "durata biglietto", nullable = false)
     private int durataBiglietto;
+
     @Column(name = "prezzo")
     private double prezzo;
+
     @Column(name = "Data Emissione")
     private LocalDate dataEmissione;
 
     @ManyToOne
-    @JoinColumn(name = "id_distributore", nullable = false)
-    private DistributoreAutomatico distributore;
+    @JoinColumn(name = "id_punto_emissione")
+    private PuntoDiEmissione puntoEmissione;
 
-    @ManyToOne
-    @JoinColumn(name = "id_rivenditore", nullable = false)
-    private Rivenditore rivenditore;
-
-    @Column(name= "Validazione", nullable = false)
-    private boolean validazione;
-    @Column(name= "Data validazione", nullable = false)
+    @Column(name= "Data validazione")
     private LocalDate dataValidazione;
 
     @ManyToOne
-    @JoinColumn(name = "id_mezzo_validante", nullable = false)
+    @JoinColumn(name = "id_mezzo_validante")
     private Mezzo mezzoValidante;
 
-
     public Biglietto() {
-
     }
 
-    public Biglietto( int durataBiglietto, double prezzo,  LocalDate dataEmissione,DistributoreAutomatico distributore, Rivenditore rivenditore, boolean validazione, LocalDate dataValidazione, Mezzo mezzoValidante ) {
+    public Biglietto(int durataBiglietto, double prezzo, LocalDate dataEmissione, PuntoDiEmissione puntoEmissione, LocalDate dataValidazione, Mezzo mezzoValidante) {
         this.prezzo = prezzo;
         this.durataBiglietto = durataBiglietto;
         this.dataEmissione = dataEmissione;
-        this.distributore = distributore;
-        this.rivenditore = rivenditore;
-        this.validazione = validazione;
+        this.puntoEmissione = puntoEmissione;
         this.dataValidazione = dataValidazione;
         this.mezzoValidante = mezzoValidante;
-
-
     }
 
     public long getId() {
@@ -83,28 +71,12 @@ public class Biglietto {
         this.dataEmissione = dataEmissione;
     }
 
-    public DistributoreAutomatico getDistributore() {
-        return distributore;
+    public PuntoDiEmissione getPuntoEmissione() {
+        return puntoEmissione;
     }
 
-    public void setDistributore(DistributoreAutomatico distributore) {
-        this.distributore = distributore;
-    }
-
-    public Rivenditore getRivenditore() {
-        return rivenditore;
-    }
-
-    public void setRivenditore(Rivenditore rivenditore) {
-        this.rivenditore = rivenditore;
-    }
-
-    public boolean isValidazione() {
-        return validazione;
-    }
-
-    public void setValidazione(boolean validazione) {
-        this.validazione = validazione;
+    public void setPuntoEmissione(PuntoDiEmissione puntoEmissione) {
+        this.puntoEmissione = puntoEmissione;
     }
 
     public LocalDate getDataValidazione() {
@@ -130,9 +102,7 @@ public class Biglietto {
                 ", durataBiglietto=" + durataBiglietto +
                 ", prezzo=" + prezzo +
                 ", dataEmissione=" + dataEmissione +
-                ", distributore=" + distributore +
-                ", rivenditore=" + rivenditore +
-                ", validazione=" + validazione +
+                ", puntoEmissione=" + puntoEmissione +
                 ", dataValidazione=" + dataValidazione +
                 ", mezzoValidante=" + mezzoValidante +
                 '}';
