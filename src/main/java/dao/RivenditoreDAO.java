@@ -46,7 +46,6 @@ public class RivenditoreDAO {
                 transaction.rollback();
             }
             System.out.println("Errore durante l'aggiornamento");
-            e.printStackTrace();
         }
     }
 

@@ -30,7 +30,6 @@ public class AbbonamentoDAO {
                 transaction.rollback();
             }
             System.out.println("Errore salvataggio abbonamento");
-            e.printStackTrace();
         }
     }
 
