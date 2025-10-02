@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="821c2404-7c27-4ff6-8fff-af23f1672be9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/DistributoreAutomaticoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/DistributoreAutomaticoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/RivenditoreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/RivenditoreDAO.java" afterDir="false" />
-    </list>
+    <list default="true" id="821c2404-7c27-4ff6-8fff-af23f1672be9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,7 +34,7 @@
     "Application.Application.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Merging Branch-Giuseppe",
+    "git-widget-placeholder": "Branch-Giuseppe",
     "kotlin-language-version-configured": "true"
   }
 }]]></component>
