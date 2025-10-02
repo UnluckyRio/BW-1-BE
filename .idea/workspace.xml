@@ -7,15 +7,6 @@
     <list default="true" id="821c2404-7c27-4ff6-8fff-af23f1672be9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/AbbonamentoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/AbbonamentoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/BigliettoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/BigliettoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/DistributoreAutomaticoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/DistributoreAutomaticoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/ManutenzioneDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/ManutenzioneDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/MezzoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/MezzoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/PercorrenzaMediaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/PercorrenzaMediaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/RivenditoreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/RivenditoreDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/TesseraDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/TesseraDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/TrattaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/TrattaDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
