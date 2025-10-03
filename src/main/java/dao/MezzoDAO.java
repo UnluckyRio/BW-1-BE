@@ -4,7 +4,7 @@ import entities.Mezzo;
 import enums.StatoMezzo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import java.time.LocalDate;
+
 import java.util.List;
 
 public class MezzoDAO {
@@ -52,12 +52,10 @@ public class MezzoDAO {
                 .getResultList();
     }
 
-    public boolean isInManutenzione(long mezzoId, LocalDate data) {
+    public boolean isInManutenzione(long mezzoId) {
         Long count = em.createQuery(
-                        "SELECT COUNT(man) FROM Manutenzione man WHERE man.mezzo.id = :mezzoId " +
-                                "AND :data BETWEEN man.dataInizio AND man.dataFine", Long.class)
+                        "SELECT COUNT(man) FROM Manutenzione man WHERE man.mezzo.id = :mezzoId ", Long.class)
                 .setParameter("mezzoId", mezzoId)
-                .setParameter("data", data)
                 .getSingleResult();
         return count > 0;
     }

@@ -101,7 +101,7 @@ public class Application {
     }
 
     private static void mostraMenu() {
-        System.out.println("");
+        System.out.println(" ");
         System.out.println("\n////////////// MENU GESTIONE TRASPORTI /////////////");
         System.out.println("1. Conta biglietti emessi in un periodo");
         System.out.println("2. Conta biglietti emessi per punto di emissione");
@@ -373,6 +373,14 @@ public class Application {
 
             long count = bigliettoDAO.countBigliettiByPeriodo(dataInizio, dataFine);
             System.out.println("Numero biglietti emessi nel periodo: " + count);
+
+            if (count > 0){
+                List<Biglietto> biglietti = bigliettoDAO.findBigliettoByPeriodo(dataInizio, dataFine);
+                for(Biglietto b : biglietti){
+                    System.out.println("ID biglietto emesso: " + b.getId());
+                }
+            }
+
         } catch (InvalidDataException | InputMismatchCustomException e) {
             System.err.println(e.getMessage());
         } catch (Exception e) {
@@ -398,6 +406,15 @@ public class Application {
 
             long count = bigliettoDAO.countBigliettiByPuntoEmissioneAndPeriodo(puntoId, dataInizio, dataFine);
             System.out.println("Numero biglietti emessi: " + count);
+
+            if (count > 0) {
+                List<Biglietto> biglietti = bigliettoDAO.findBigliettoByPuntoEmissioneAndPeriodo(puntoId, dataInizio, dataFine);
+                for(Biglietto b : biglietti) {
+                    System.out.println("ID biglietto emesso: " + b.getId());
+                }
+            }
+
+
         } catch (NotFoundException e) {
             System.err.println(e.getMessage());
         } catch (InvalidDataException | InputMismatchCustomException e) {
@@ -426,6 +443,12 @@ public class Application {
 
             long count = bigliettoDAO.countBigliettiVidimatiByMezzo(mezzoId, dataInizio, dataFine);
             System.out.println("Numero biglietti vidimati sul mezzo: " + count);
+            if (count > 0) {
+                List<Biglietto> biglietti = bigliettoDAO.trovaBigliettiVidimatiByMezzo(mezzoId, dataInizio, dataFine);
+                for(Biglietto b : biglietti) {
+                    System.out.println("ID biglietto vidimato: " + b.getId());
+                }
+            }
         } catch (NotFoundException e) {
             System.err.println(e.getMessage());
         } catch (InvalidDataException | InputMismatchCustomException e) {
@@ -447,6 +470,12 @@ public class Application {
 
             long count = bigliettoDAO.countBigliettiVidimatiByPeriodo(dataInizio, dataFine);
             System.out.println("Numero totale biglietti vidimati: " + count);
+            if (count > 0) {
+                List<Biglietto> biglietti = bigliettoDAO.countBigliettiVidimatiTotal(dataInizio, dataFine);
+                for(Biglietto b : biglietti) {
+                    System.out.println("ID biglietto vidimato: " + b.getId());
+                }
+            }
         } catch (InvalidDataException | InputMismatchCustomException e) {
             System.err.println(e.getMessage());
         } catch (Exception e) {
@@ -466,6 +495,14 @@ public class Application {
 
             long count = abbonamentoDAO.countAbbonamentiByPeriodo(dataInizio, dataFine);
             System.out.println("Numero abbonamenti emessi nel periodo: " + count);
+            if (count > 0) {
+                List<Abbonamento> abbonamenti = abbonamentoDAO.StampaAbbonamentiByPeriodo(dataInizio, dataFine);
+                for(Abbonamento a : abbonamenti) {
+                    System.out.println("ID abbonamento emesso: " + a.getId());
+                }
+            }
+
+
         } catch (InvalidDataException | InputMismatchCustomException e) {
             System.err.println(e.getMessage());
         } catch (Exception e) {
@@ -491,6 +528,13 @@ public class Application {
 
             long count = abbonamentoDAO.countAbbonamentiByPuntoEmissioneAndPeriodo(puntoId, dataInizio, dataFine);
             System.out.println("Numero abbonamenti emessi: " + count);
+
+            if (count > 0) {
+                List<Abbonamento> abbonamenti = abbonamentoDAO.stampaAbbonamentiByPuntoEmissioneAndPeriodo(puntoId,dataInizio, dataFine);
+                for(Abbonamento a : abbonamenti) {
+                    System.out.println("ID abbonamento emesso: " + a.getId());
+                }
+            }
         } catch (NotFoundException e) {
             System.err.println(e.getMessage());
         } catch (InvalidDataException | InputMismatchCustomException e) {
@@ -575,13 +619,11 @@ public class Application {
                 throw new NotFoundException("Id " + mezzoId + " non trovato");
             }
 
-            LocalDate data = leggiData("Data (YYYY-MM-DD): ");
-
-            boolean inManutenzione = mezzoDAO.isInManutenzione(mezzoId, data);
+            boolean inManutenzione = mezzoDAO.isInManutenzione(mezzoId);
             if (inManutenzione) {
-                System.out.println("Il mezzo è IN MANUTENZIONE alla data specificata.");
+                System.out.println("Il mezzo è IN MANUTENZIONE");
             } else {
-                System.out.println("Il mezzo NON è in manutenzione alla data specificata.");
+                System.out.println("Il mezzo NON è in manutenzione");
             }
         } catch (NotFoundException e) {
             System.err.println(e.getMessage());

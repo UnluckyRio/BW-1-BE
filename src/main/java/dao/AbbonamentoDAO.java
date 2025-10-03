@@ -4,6 +4,7 @@ import entities.Abbonamento;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import java.time.LocalDate;
+import java.util.List;
 
 public class AbbonamentoDAO {
 
@@ -72,6 +73,17 @@ public class AbbonamentoDAO {
                 .setParameter("dataFine", dataFine)
                 .getSingleResult();
     }
+    public List<Abbonamento> stampaAbbonamentiByPuntoEmissioneAndPeriodo(Long puntoEmissioneId, LocalDate dataInizio, LocalDate dataFine) {
+        return entityManager.createQuery(
+                        "SELECT a FROM Abbonamento a " +
+                                "JOIN a.puntoEmissione pe " +
+                                "WHERE pe.id = :puntoId " +
+                                "AND a.dataEmissione BETWEEN :dataInizio AND :dataFine", Abbonamento.class)
+                .setParameter("puntoId", puntoEmissioneId)
+                .setParameter("dataInizio", dataInizio)
+                .setParameter("dataFine", dataFine)
+                .getResultList();
+    }
 
     public long countAbbonamentiByPeriodo(LocalDate dataInizio, LocalDate dataFine) {
         return entityManager.createQuery(
@@ -79,5 +91,12 @@ public class AbbonamentoDAO {
                 .setParameter("dataInizio", dataInizio)
                 .setParameter("dataFine", dataFine)
                 .getSingleResult();
+    }
+    public List<Abbonamento> StampaAbbonamentiByPeriodo(LocalDate dataInizio, LocalDate dataFine) {
+        return entityManager.createQuery(
+                        "SELECT a FROM Abbonamento a WHERE a.dataEmissione BETWEEN :dataInizio AND :dataFine", Abbonamento.class)
+                .setParameter("dataInizio", dataInizio)
+                .setParameter("dataFine", dataFine)
+                .getResultList();
     }
 }

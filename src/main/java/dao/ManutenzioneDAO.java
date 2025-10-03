@@ -50,7 +50,7 @@ public class ManutenzioneDAO {
 
     public List<Manutenzione> findByMezzo(long mezzoId) {
         return em.createQuery(
-                        "SELECT m FROM Manutenzione m WHERE m.mezzo.id = :mezzoId ORDER BY m.dataInizio DESC", Manutenzione.class)
+                        "SELECT m FROM Manutenzione m WHERE m.mezzo.id = :mezzoId", Manutenzione.class)
                 .setParameter("mezzoId", mezzoId)
                 .getResultList();
     }
