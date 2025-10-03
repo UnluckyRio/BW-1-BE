@@ -17,18 +17,10 @@ public class MezzoDAO {
 
     public void save(Mezzo newMezzo) {
         EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            em.persist(newMezzo);
-            transaction.commit();
-            System.out.println("Mezzo " + newMezzo + " salvato con successo");
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            System.out.println("Errore durante il salvataggio del mezzo");
-            e.printStackTrace();
-        }
+        transaction.begin();
+        em.persist(newMezzo);
+        transaction.commit();
+       /* System.out.println("Mezzo " + newMezzo + " salvato con successo");*/
     }
 
     public Mezzo findById(long id) {
@@ -37,36 +29,20 @@ public class MezzoDAO {
 
     public void update(Mezzo mezzo) {
         EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            em.merge(mezzo);
-            transaction.commit();
-            System.out.println("Mezzo aggiornato con successo");
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            System.out.println("Errore durante l'aggiornamento del mezzo");
-            e.printStackTrace();
-        }
+        transaction.begin();
+        em.merge(mezzo);
+        transaction.commit();
+        System.out.println("Mezzo aggiornato con successo");
     }
 
     public void delete(long id) {
         Mezzo found = findById(id);
         if (found != null) {
             EntityTransaction transaction = em.getTransaction();
-            try {
-                transaction.begin();
-                em.remove(found);
-                transaction.commit();
-                System.out.println("Mezzo eliminato con successo");
-            } catch (Exception e) {
-                if (transaction.isActive()) {
-                    transaction.rollback();
-                }
-                System.out.println("Errore durante l'eliminazione del mezzo");
-                e.printStackTrace();
-            }
+            transaction.begin();
+            em.remove(found);
+            transaction.commit();
+            System.out.println("Mezzo eliminato con successo");
         }
     }
 

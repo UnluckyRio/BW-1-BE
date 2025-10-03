@@ -20,10 +20,10 @@ public class BigliettoDAO {
             transaction.begin();
             entityManager.persist(newBiglietto);
             transaction.commit();
-            System.out.println("Biglietto salvato correttamente - ID: " + newBiglietto.getId() +
+          /*  System.out.println("Biglietto salvato correttamente - ID: " + newBiglietto.getId() +
                     " - Emesso presso ID Punto Emissione: " + newBiglietto.getPuntoEmissione().getIdPuntoEmissione() +
                     " (" + newBiglietto.getPuntoEmissione().getIndirizzo() + ")" +
-                    " - Prezzo: €" + newBiglietto.getPrezzo());
+                    " - Prezzo: €" + newBiglietto.getPrezzo());*/
         } catch (Exception e) {
             if(transaction.isActive()){
                 transaction.rollback();
@@ -34,12 +34,7 @@ public class BigliettoDAO {
     }
 
     public Biglietto findById(long bigliettoid){
-        try {
-            Biglietto trovato = entityManager.find(Biglietto.class, bigliettoid);
-            return trovato;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        return entityManager.find(Biglietto.class, bigliettoid);
     }
 
     public void validaBiglietto(long bigliettoid, long mezzoId) {
@@ -65,16 +60,12 @@ public class BigliettoDAO {
     }
 
     public void deleteWithId(long bigliettoid){
-        try {
-            Biglietto found = this.findById(bigliettoid);
-            EntityTransaction transaction = entityManager.getTransaction();
-            transaction.begin();
-            entityManager.remove(found);
-            transaction.commit();
-            System.out.println(found + " Rimosso correttamente");
-        } catch (Exception e){
-            throw new RuntimeException(e);
-        }
+        Biglietto found = this.findById(bigliettoid);
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.remove(found);
+        transaction.commit();
+        System.out.println(found + " Rimosso correttamente");
     }
 
     public void update(Biglietto biglietto) {
@@ -94,7 +85,9 @@ public class BigliettoDAO {
 
     public long countBigliettiByPuntoEmissioneAndPeriodo(Long puntoEmissioneId, LocalDate dataInizio, LocalDate dataFine) {
         return entityManager.createQuery(
-                        "SELECT COUNT(b) FROM Biglietto b WHERE b.puntoEmissione.idPuntoEmissione = :puntoId " +
+                        "SELECT COUNT(b) FROM Biglietto b " +
+                                "JOIN b.puntoEmissione pe " +
+                                "WHERE pe.id = :puntoId " +
                                 "AND b.dataEmissione BETWEEN :dataInizio AND :dataFine", Long.class)
                 .setParameter("puntoId", puntoEmissioneId)
                 .setParameter("dataInizio", dataInizio)
@@ -112,8 +105,11 @@ public class BigliettoDAO {
 
     public long countBigliettiVidimatiByMezzo(Long mezzoId, LocalDate dataInizio, LocalDate dataFine) {
         return entityManager.createQuery(
-                        "SELECT COUNT(b) FROM Biglietto b WHERE b.mezzoValidante.id = :mezzoId " +
-                                "AND b.dataValidazione IS NOT NULL AND b.dataValidazione BETWEEN :dataInizio AND :dataFine", Long.class)
+                        "SELECT COUNT(b) FROM Biglietto b " +
+                                "JOIN b.mezzoValidante mv " +
+                                "WHERE mv.id = :mezzoId " +
+                                "AND b.dataValidazione IS NOT NULL " +
+                                "AND b.dataValidazione BETWEEN :dataInizio AND :dataFine", Long.class)
                 .setParameter("mezzoId", mezzoId)
                 .setParameter("dataInizio", dataInizio)
                 .setParameter("dataFine", dataFine)

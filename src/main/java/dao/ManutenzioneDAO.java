@@ -14,19 +14,15 @@ public class ManutenzioneDAO {
     }
 
     public void save(Manutenzione newManutenzione) {
-        try {
-            EntityTransaction transaction = em.getTransaction();
-            transaction.begin();
-            em.persist(newManutenzione);
-            transaction.commit();
-            System.out.println("Nuova Manutenzione ID: " +
-                    newManutenzione.getIdManutenzione() +
-                    ", del Mezzo " +
-                    newManutenzione.getMezzo() +
-                    " creata.");
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        em.persist(newManutenzione);
+        transaction.commit();
+     /*   System.out.println("Nuova Manutenzione ID: " +
+                newManutenzione.getIdManutenzione() +
+                ", del Mezzo " +
+                newManutenzione.getMezzo() +
+                " creata.");*/
     }
 
     public Manutenzione findMaintenanceById(long idManutenzione) {
@@ -35,15 +31,10 @@ public class ManutenzioneDAO {
 
     public void update(Manutenzione manutenzione) {
         EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            em.merge(manutenzione);
-            transaction.commit();
-            System.out.println("Manutenzione aggiornata");
-        } catch (Exception ex) {
-            if (transaction.isActive()) transaction.rollback();
-            System.out.println(ex.getMessage());
-        }
+        transaction.begin();
+        em.merge(manutenzione);
+        transaction.commit();
+        System.out.println("Manutenzione aggiornata");
     }
 
     public void delete(long id) {
@@ -56,10 +47,10 @@ public class ManutenzioneDAO {
             System.out.println("La manutenzione " + id + " è stata eliminata con successo");
         }
     }
+
     public List<Manutenzione> findByMezzo(long mezzoId) {
         return em.createQuery(
-                        "SELECT m FROM Manutenzione m WHERE m.mezzo.id = :mezzoId ORDER BY m.dataInizio DESC",
-                        Manutenzione.class)
+                        "SELECT m FROM Manutenzione m WHERE m.mezzo.id = :mezzoId ORDER BY m.dataInizio DESC", Manutenzione.class)
                 .setParameter("mezzoId", mezzoId)
                 .getResultList();
     }

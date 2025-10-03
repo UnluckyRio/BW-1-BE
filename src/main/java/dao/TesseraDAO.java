@@ -18,14 +18,9 @@ public class TesseraDAO {
 
     public void create(Tessera tessera) {
         EntityTransaction transition = em.getTransaction();
-        try {
-            transition.begin();
-            em.persist(tessera);
-            transition.commit();
-        } catch (Exception e) {
-            if (transition.isActive()) transition.rollback();
-            throw e;
-        }
+        transition.begin();
+        em.persist(tessera);
+        transition.commit();
     }
 
     public Tessera findById(long id) {
@@ -39,45 +34,32 @@ public class TesseraDAO {
     }
 
     public List<Tessera> findAll() {
-        return em.createQuery("SELECT t FROM Tessera t", Tessera.class).getResultList();
+        return em.createQuery("SELECT t FROM Tessera t", Tessera.class)
+                .getResultList();
     }
 
     public void update(Tessera tessera) {
         EntityTransaction transition = em.getTransaction();
-        try {
-            transition.begin();
-            em.merge(tessera);
-            transition.commit();
-        } catch (Exception e) {
-            if (transition.isActive()) transition.rollback();
-            throw e;
-        }
+        transition.begin();
+        em.merge(tessera);
+        transition.commit();
     }
 
     public void delete(Tessera tessera) {
         EntityTransaction transition = em.getTransaction();
-        try {
-            transition.begin();
-            em.remove(em.contains(tessera) ? tessera : em.merge(tessera));
-            transition.commit();
-        } catch (Exception e) {
-            if (transition.isActive()) transition.rollback();
-            throw e;
-        }
+        transition.begin();
+        em.remove(em.contains(tessera) ? tessera : em.merge(tessera));
+        transition.commit();
     }
 
     public boolean verificaValiditaAbbonamento(long tesseraId) {
-        try {
-            Long count = em.createQuery(
-                            "SELECT COUNT(a) FROM Abbonamento a WHERE a.tessera.id = :tesseraId " +
-                                    "AND :oggi BETWEEN a.datainiziovalidita AND a.datafinevalidita", Long.class)
-                    .setParameter("tesseraId", tesseraId)
-                    .setParameter("oggi", LocalDate.now())
-                    .getSingleResult();
-            return count > 0;
-        } catch (Exception e) {
-            return false;
-        }
+        Long count = em.createQuery(
+                        "SELECT COUNT(a) FROM Abbonamento a WHERE a.tessera.id = :tesseraId " +
+                                "AND :oggi BETWEEN a.datainiziovalidita AND a.datafinevalidita", Long.class)
+                .setParameter("tesseraId", tesseraId)
+                .setParameter("oggi", LocalDate.now())
+                .getSingleResult();
+        return count > 0;
     }
 
     public Abbonamento findAbbonamentoValidoByTessera(long tesseraId) {

@@ -9,21 +9,27 @@ public class PercorrenzaMedia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_tempoMedioPercorrenza")
+    @Column(name = "idtempoMedioPercorrenza")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_tratta")
+    @JoinColumn(name = "idtratta")
     private Tratta tratta;
 
     @Column(name = "tempoEffettivo")
     private LocalTime tempoEffettivo;
+
+    @Column(name = "id_mezzo")
+    private Long idMezzo;
 
     public PercorrenzaMedia() {}
 
     public PercorrenzaMedia(Tratta tratta, LocalTime tempoEffettivo) {
         this.tratta = tratta;
         this.tempoEffettivo = tempoEffettivo;
+        if (tratta != null && tratta.getMezzo() != null) {
+            this.idMezzo = tratta.getMezzo().getId();
+        }
     }
 
     public Long getId() {
@@ -36,6 +42,9 @@ public class PercorrenzaMedia {
 
     public void setTratta(Tratta tratta) {
         this.tratta = tratta;
+        if (tratta != null && tratta.getMezzo() != null) {
+            this.idMezzo = tratta.getMezzo().getId();
+        }
     }
 
     public LocalTime getTempoEffettivo() {
@@ -46,11 +55,16 @@ public class PercorrenzaMedia {
         this.tempoEffettivo = tempoEffettivo;
     }
 
+    public Long getIdMezzo() {
+        return idMezzo;
+    }
+
     @Override
     public String toString() {
         return "PercorrenzaMedia{" +
                 "id=" + id +
-                ", tratta=" + tratta +
+                ", tratta=" + (tratta != null ? tratta.getId() : null) +
+                ", idMezzo=" + idMezzo +
                 ", tempoEffettivo=" + tempoEffettivo +
                 '}';
     }

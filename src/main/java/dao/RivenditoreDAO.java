@@ -14,20 +14,12 @@ public class RivenditoreDAO {
 
     public void save(Rivenditore newRivenditore) {
         EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            em.persist(newRivenditore);
-            transaction.commit();
-            System.out.println("Rivenditore salvato con successo - ID Punto Emissione: " +
-                    newRivenditore.getIdPuntoEmissione() + " - Nome: " + newRivenditore.getNomeRivenditore() +
-                    " - Indirizzo: " + newRivenditore.getIndirizzo());
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            System.out.println("Errore durante il salvataggio del rivenditore");
-            e.printStackTrace();
-        }
+        transaction.begin();
+        em.persist(newRivenditore);
+        transaction.commit();
+  /*      System.out.println("Rivenditore salvato con successo - ID Punto Emissione: " +
+                newRivenditore.getIdPuntoEmissione() + " - Nome: " + newRivenditore.getNomeRivenditore() +
+                " - Indirizzo: " + newRivenditore.getIndirizzo());*/
     }
 
     public Rivenditore findById(long id) {
@@ -36,35 +28,20 @@ public class RivenditoreDAO {
 
     public void update(Rivenditore rivenditore) {
         EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            em.merge(rivenditore);
-            transaction.commit();
-            System.out.println("Rivenditore aggiornato con successo");
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            System.out.println("Errore durante l'aggiornamento");
-        }
+        transaction.begin();
+        em.merge(rivenditore);
+        transaction.commit();
+        System.out.println("Rivenditore aggiornato con successo");
     }
 
     public void delete(long id) {
         Rivenditore found = findById(id);
         if (found != null) {
             EntityTransaction transaction = em.getTransaction();
-            try {
-                transaction.begin();
-                em.remove(found);
-                transaction.commit();
-                System.out.println("Rivenditore eliminato con successo");
-            } catch (Exception e) {
-                if (transaction.isActive()) {
-                    transaction.rollback();
-                }
-                System.out.println("Errore durante l'eliminazione");
-                e.printStackTrace();
-            }
+            transaction.begin();
+            em.remove(found);
+            transaction.commit();
+            System.out.println("Rivenditore eliminato con successo");
         }
     }
 }

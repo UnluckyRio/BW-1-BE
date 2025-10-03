@@ -15,14 +15,9 @@ public class UtenteDAO {
 
     public void create(Utente utente) {
         EntityTransaction transition = em.getTransaction();
-        try {
-            transition.begin();
-            em.persist(utente);
-            transition.commit();
-        } catch (Exception e) {
-            if (transition.isActive()) transition.rollback();
-            throw e;
-        }
+        transition.begin();
+        em.persist(utente);
+        transition.commit();
     }
 
     public Utente findById(long id) {
@@ -30,30 +25,21 @@ public class UtenteDAO {
     }
 
     public List<Utente> findAll() {
-        return em.createQuery("SELECT u FROM Utente u", Utente.class).getResultList();
+        return em.createQuery("SELECT u FROM Utente u", Utente.class)
+                .getResultList();
     }
 
     public void update(Utente utente) {
         EntityTransaction transition = em.getTransaction();
-        try {
-            transition.begin();
-            em.merge(utente);
-            transition.commit();
-        } catch (Exception e) {
-            if (transition.isActive()) transition.rollback();
-            throw e;
-        }
+        transition.begin();
+        em.merge(utente);
+        transition.commit();
     }
 
     public void delete(Utente utente) {
         EntityTransaction transition = em.getTransaction();
-        try {
-            transition.begin();
-            em.remove(em.contains(utente) ? utente : em.merge(utente));
-            transition.commit();
-        } catch (Exception e) {
-            if (transition.isActive()) transition.rollback();
-            throw e;
-        }
+        transition.begin();
+        em.remove(em.contains(utente) ? utente : em.merge(utente));
+        transition.commit();
     }
 }

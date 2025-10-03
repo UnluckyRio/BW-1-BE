@@ -19,12 +19,12 @@ public class AbbonamentoDAO {
             transaction.begin();
             entityManager.persist(newAbbonamento);
             transaction.commit();
-            System.out.println("Abbonamento salvato correttamente - ID: " + newAbbonamento.getId() +
+         /*   System.out.println("Abbonamento salvato correttamente - ID: " + newAbbonamento.getId() +
                     " - Tipo: " + newAbbonamento.getTipoAbbonamento() +
                     " - Emesso presso ID Punto Emissione: " + newAbbonamento.getPuntoEmissione().getIdPuntoEmissione() +
                     " (" + newAbbonamento.getPuntoEmissione().getIndirizzo() + ")" +
                     " - Tessera ID: " + newAbbonamento.getTessera().getId() +
-                    " - Prezzo: €" + newAbbonamento.getPrezzo());
+                    " - Prezzo: €" + newAbbonamento.getPrezzo());*/
         } catch (Exception e) {
             if(transaction.isActive()){
                 transaction.rollback();
@@ -34,25 +34,16 @@ public class AbbonamentoDAO {
     }
 
     public Abbonamento findById(long Abbonamentoid){
-        try {
-            Abbonamento trovato = entityManager.find(Abbonamento.class, Abbonamentoid);
-            return trovato;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        return entityManager.find(Abbonamento.class, Abbonamentoid);
     }
 
     public void deleteWithId(long abbonamentoid){
-        try {
-            Abbonamento found = this.findById(abbonamentoid);
-            EntityTransaction transaction = entityManager.getTransaction();
-            transaction.begin();
-            entityManager.remove(found);
-            transaction.commit();
-            System.out.println(found + " Rimosso correttamente");
-        } catch (Exception e){
-            throw new RuntimeException(e);
-        }
+        Abbonamento found = this.findById(abbonamentoid);
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.remove(found);
+        transaction.commit();
+        System.out.println(found + " Rimosso correttamente");
     }
 
     public void update(Abbonamento abbonamento) {
@@ -72,7 +63,9 @@ public class AbbonamentoDAO {
 
     public long countAbbonamentiByPuntoEmissioneAndPeriodo(Long puntoEmissioneId, LocalDate dataInizio, LocalDate dataFine) {
         return entityManager.createQuery(
-                        "SELECT COUNT(a) FROM Abbonamento a WHERE a.puntoEmissione.idPuntoEmissione = :puntoId " +
+                        "SELECT COUNT(a) FROM Abbonamento a " +
+                                "JOIN a.puntoEmissione pe " +
+                                "WHERE pe.id = :puntoId " +
                                 "AND a.dataEmissione BETWEEN :dataInizio AND :dataFine", Long.class)
                 .setParameter("puntoId", puntoEmissioneId)
                 .setParameter("dataInizio", dataInizio)

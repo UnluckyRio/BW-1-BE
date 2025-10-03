@@ -3,7 +3,7 @@ package dao;
 import entities.Tratta;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import java.time.LocalDate;
+
 import java.util.List;
 
 public class TrattaDAO {
@@ -15,24 +15,20 @@ public class TrattaDAO {
     }
 
     public void save(Tratta newTratta) {
-        try {
-            EntityTransaction transaction = em.getTransaction();
-            transaction.begin();
-            em.persist(newTratta);
-            transaction.commit();
-            System.out.println("Nuova Tratta " +
-                    newTratta.getId() +
-                    " effettuata dal Mezzo " +
-                    newTratta.getMezzo() +
-                    " con Partenza: " +
-                    newTratta.getPartenza() +
-                    " ed Arrivo: " +
-                    newTratta.getArrivo() +
-                    ". \n Il tempo Previsto della tratta è di " +
-                    newTratta.getTempoPrevisto());
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        em.persist(newTratta);
+        transaction.commit();
+ /*       System.out.println("Nuova Tratta " +
+                newTratta.getId() +
+                " effettuata dal Mezzo " +
+                newTratta.getMezzo() +
+                " con Partenza: " +
+                newTratta.getPartenza() +
+                " ed Arrivo: " +
+                newTratta.getArrivo() +
+                ". \n Il tempo Previsto della tratta è di " +
+                newTratta.getTempoPrevisto());*/
     }
 
     public Tratta findPathById(long id) {
@@ -41,15 +37,10 @@ public class TrattaDAO {
 
     public void update(Tratta tratta) {
         EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            em.merge(tratta);
-            transaction.commit();
-            System.out.println("Tratta aggiornata");
-        } catch (Exception ex) {
-            if (transaction.isActive()) transaction.rollback();
-            System.out.println(ex.getMessage());
-        }
+        transaction.begin();
+        em.merge(tratta);
+        transaction.commit();
+        System.out.println("Tratta aggiornata");
     }
 
     public void delete(long id) {
@@ -62,17 +53,19 @@ public class TrattaDAO {
             System.out.println("La tratta " + id + " è stata eliminata con successo");
         }
     }
-
-    public List<Tratta> findAll() {
-        return em.createQuery("SELECT t FROM Tratta t", Tratta.class).getResultList();
-    }
-    public long countPercorrenzeByTratta(long trattaId, LocalDate dataInizio, LocalDate dataFine) {
+    public List<Long> getMezziIdPerTratta(String partenza, String arrivo) {
         return em.createQuery(
-                        "SELECT COUNT(pm) FROM PercorrenzaMedia pm WHERE pm.tratta.id = :trattaId " +
-                                "AND pm.dataPercorrenza BETWEEN :dataInizio AND :dataFine", Long.class)
-                .setParameter("trattaId", trattaId)
-                .setParameter("dataInizio", dataInizio)
-                .setParameter("dataFine", dataFine)
+                        "SELECT t.mezzo.id FROM Tratta t WHERE t.partenza = :partenza AND t.arrivo = :arrivo",
+                        Long.class)
+                .setParameter("partenza", partenza)
+                .setParameter("arrivo", arrivo)
+                .getResultList();
+    }
+    public long contaPercorrenzePerTratta(String partenza, String arrivo) {
+        return em.createQuery(
+                        "SELECT COUNT(t) FROM Tratta t WHERE t.partenza = :partenza AND t.arrivo = :arrivo", Long.class)
+                .setParameter("partenza", partenza)
+                .setParameter("arrivo", arrivo)
                 .getSingleResult();
     }
 }

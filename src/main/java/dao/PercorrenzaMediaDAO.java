@@ -15,15 +15,11 @@ public class PercorrenzaMediaDAO {
     }
 
     public void save(PercorrenzaMedia newPercorrenzaMedia) {
-        try {
-            EntityTransaction transaction = em.getTransaction();
-            transaction.begin();
-            em.persist(newPercorrenzaMedia);
-            transaction.commit();
-            System.out.println("La percorrenza media salvata con successo");
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        em.persist(newPercorrenzaMedia);
+        transaction.commit();
+       /* System.out.println("La percorrenza media salvata con successo");*/
     }
 
     public PercorrenzaMedia findAvaragePathById(long id) {
@@ -32,15 +28,10 @@ public class PercorrenzaMediaDAO {
 
     public void update(PercorrenzaMedia percorrenza) {
         EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            em.merge(percorrenza);
-            transaction.commit();
-            System.out.println("Percorrenza media aggiornata");
-        } catch (Exception ex) {
-            if (transaction.isActive()) transaction.rollback();
-            System.out.println(ex.getMessage());
-        }
+        transaction.begin();
+        em.merge(percorrenza);
+        transaction.commit();
+        System.out.println("Percorrenza media aggiornata");
     }
 
     public void delete(long id) {
@@ -54,14 +45,14 @@ public class PercorrenzaMediaDAO {
         }
     }
 
-    public List<PercorrenzaMedia> findAll() {
-        return em.createQuery("SELECT p FROM PercorrenzaMedia p", PercorrenzaMedia.class).getResultList();
+    public List<PercorrenzaMedia> getAllPercorrenzeMedie() {
+        return em.createQuery("SELECT pm FROM PercorrenzaMedia pm", PercorrenzaMedia.class)
+                .getResultList();
     }
 
-    public LocalTime calcolaTempoMedioEffettivo(long trattaId) {
+    public LocalTime calcolaTempoMedioEffettivo(Long trattaId) {
         List<PercorrenzaMedia> percorrenze = em.createQuery(
-                        "SELECT pm FROM PercorrenzaMedia pm WHERE pm.tratta.id = :trattaId",
-                        PercorrenzaMedia.class)
+                        "SELECT pm FROM PercorrenzaMedia pm WHERE pm.tratta.id = :trattaId", PercorrenzaMedia.class)
                 .setParameter("trattaId", trattaId)
                 .getResultList();
 
@@ -69,12 +60,12 @@ public class PercorrenzaMediaDAO {
             return null;
         }
 
-        long totalSeconds = 0;
+        long totalSecondi = 0;
         for (PercorrenzaMedia pm : percorrenze) {
-            totalSeconds += pm.getTempoEffettivo().toSecondOfDay();
+            totalSecondi += pm.getTempoEffettivo().toSecondOfDay();
         }
-        long averageSeconds = totalSeconds / percorrenze.size();
 
+        long averageSeconds = totalSecondi / percorrenze.size();
         return LocalTime.ofSecondOfDay(averageSeconds);
     }
 }
